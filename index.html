@@ -1,0 +1,1688 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Manuel Gozzi — AI Engineer & Researcher</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Bebas+Neue&display=swap"
+    rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0a0a08;
+      --bg2: #111110;
+      --surface: #181816;
+      --border: #2a2a26;
+      --accent: #c8a96e;
+      --accent2: #7ec8a9;
+      --accent3: #a97ec8;
+      --text: #e8e6df;
+      --muted: #6b6960;
+      --dim: #3a3a35;
+      --white: #f5f3ee;
+    }
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 18px;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── Noise overlay ─── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+      opacity: 0.025;
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ─── Scrollbar ─── */
+    ::-webkit-scrollbar {
+      width: 3px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: var(--bg);
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: var(--accent);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem 3rem;
+      border-bottom: 1px solid transparent;
+      transition: border-color .4s, background .4s;
+    }
+
+    nav.scrolled {
+      background: rgba(10, 10, 8, .92);
+      backdrop-filter: blur(12px);
+      border-color: var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: .15em;
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+      text-decoration: none;
+      text-transform: uppercase;
+      transition: color .2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero-left {
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 2rem 4rem 5rem 5rem;
+      position: relative;
+      z-index: 2;
+    }
+
+    .hero-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .7rem;
+      letter-spacing: .2em;
+      color: var(--accent);
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp .8s .2s forwards;
+    }
+
+    .hero-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(4rem, 8vw, 8rem);
+      line-height: .92;
+      letter-spacing: .02em;
+      color: var(--white);
+      opacity: 0;
+      animation: fadeUp .9s .4s forwards;
+    }
+
+    .hero-name span {
+      display: block;
+      color: var(--accent);
+    }
+
+    .hero-tagline {
+      font-style: italic;
+      font-size: 1.3rem;
+      color: var(--muted);
+      margin-top: 1.5rem;
+      max-width: 400px;
+      opacity: 0;
+      animation: fadeUp .9s .65s forwards;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2.5rem;
+      opacity: 0;
+      animation: fadeUp .9s .85s forwards;
+    }
+
+    .btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: .75rem 1.8rem;
+      border: 1px solid var(--accent);
+      color: var(--accent);
+      transition: background .2s, color .2s;
+    }
+
+    .btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn.filled {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .btn.filled:hover {
+      background: transparent;
+      color: var(--accent);
+    }
+
+    .hero-right {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      position: relative;
+      padding: 2rem 3rem 3rem;
+    }
+
+    /* Big decorative number */
+    .hero-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 38vw;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--dim);
+      position: absolute;
+      right: -8vw;
+      bottom: -4vw;
+      line-height: 1;
+      pointer-events: none;
+      opacity: 0;
+      animation: fadeIn 1.5s 1s forwards;
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      z-index: 2;
+      padding: 2rem;
+      opacity: 0;
+      animation: fadeUp 1s .9s forwards;
+    }
+
+    .stat-card {
+      border: 1px solid var(--border);
+      padding: 1.5rem;
+      background: var(--surface);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+    }
+
+    .stat-number {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3rem;
+      color: var(--accent);
+      line-height: 1;
+    }
+
+    .stat-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-top: .4rem;
+    }
+
+    /* ─── SECTION BASE ─── */
+    section {
+      padding: 7rem 5rem;
+    }
+
+    .section-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .68rem;
+      letter-spacing: .25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: .8rem;
+    }
+
+    .section-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      letter-spacing: .04em;
+      line-height: 1;
+      color: var(--white);
+      margin-bottom: 3rem;
+    }
+
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 0;
+    }
+
+    /* ─── ABOUT ─── */
+    .about {
+      display: grid;
+      grid-template-columns: 1fr 1.6fr;
+      gap: 6rem;
+      align-items: start;
+    }
+
+    .about-left {
+      position: sticky;
+      top: 8rem;
+    }
+
+    .about-body p {
+      font-size: 1.2rem;
+      color: var(--text);
+      margin-bottom: 1.4rem;
+      line-height: 1.75;
+    }
+
+    .about-body p em {
+      color: var(--accent);
+      font-style: italic;
+    }
+
+    .about-body strong {
+      color: var(--white);
+      font-weight: 600;
+    }
+
+    .skills-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .6rem;
+      margin-top: 2rem;
+    }
+
+    .skill-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .08em;
+      padding: .4rem .9rem;
+      border: 1px solid var(--dim);
+      color: var(--muted);
+      transition: border-color .2s, color .2s;
+    }
+
+    .skill-tag:hover {
+      border-color: var(--accent2);
+      color: var(--accent2);
+    }
+
+    /* ─── EXPERIENCE ─── */
+    .experience {
+      background: var(--bg2);
+    }
+
+    .timeline {
+      position: relative;
+      padding-left: 2rem;
+    }
+
+    .timeline::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--border);
+    }
+
+    .timeline-item {
+      position: relative;
+      padding: 2.5rem 0 2.5rem 3rem;
+      border-bottom: 1px solid var(--border);
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity .6s, transform .6s;
+    }
+
+    .timeline-item.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .timeline-item:last-child {
+      border-bottom: none;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -2.35rem;
+      top: 2.8rem;
+      width: 10px;
+      height: 10px;
+      border: 2px solid var(--accent);
+      background: var(--bg);
+      transform: rotate(45deg);
+    }
+
+    .timeline-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-bottom: .6rem;
+    }
+
+    .timeline-role {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: .05em;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .timeline-company {
+      font-style: italic;
+      color: var(--accent);
+      font-size: 1.1rem;
+      margin-top: .2rem;
+      margin-bottom: 1rem;
+    }
+
+    .timeline-desc {
+      color: var(--muted);
+      font-size: 1rem;
+      line-height: 1.7;
+      max-width: 700px;
+    }
+
+    .timeline-tech {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      margin-top: 1rem;
+    }
+
+    .tech-pill {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      padding: .25rem .7rem;
+      background: var(--surface);
+      color: var(--accent2);
+      border: 1px solid var(--dim);
+      letter-spacing: .05em;
+    }
+
+    /* ─── ACHIEVEMENTS ─── */
+    .achievements-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1px;
+      background: var(--border);
+    }
+
+    .achievement-card {
+      background: var(--bg);
+      padding: 2.5rem;
+      position: relative;
+      overflow: hidden;
+      transition: background .3s;
+    }
+
+    .achievement-card:hover {
+      background: var(--surface);
+    }
+
+    .achievement-card::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent2), transparent);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .4s;
+    }
+
+    .achievement-card:hover::after {
+      transform: scaleX(1);
+    }
+
+    .achievement-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .achievement-metric {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 3.5rem;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: .3rem;
+    }
+
+    .achievement-title {
+      font-size: 1.1rem;
+      color: var(--white);
+      font-weight: 600;
+      margin-bottom: .5rem;
+    }
+
+    .achievement-desc {
+      font-size: .95rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── RESEARCH & PUBLICATIONS ─── */
+    .research {
+      background: var(--bg2);
+    }
+
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .pub-item {
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 2rem;
+      align-items: start;
+      opacity: 0;
+      transform: translateY(15px);
+      transition: opacity .5s, transform .5s;
+    }
+
+    .pub-item.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    .pub-index {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      color: var(--dim);
+      padding-top: .3rem;
+    }
+
+    .pub-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      padding: .3rem .7rem;
+      border: 1px solid;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      white-space: nowrap;
+      align-self: start;
+    }
+
+    .pub-badge.q1 {
+      color: #c8a96e;
+      border-color: #c8a96e44;
+    }
+
+    .pub-badge.q2 {
+      color: var(--accent2);
+      border-color: #7ec8a944;
+    }
+
+    .pub-badge.conf {
+      color: #a97ec8;
+      border-color: #a97ec844;
+    }
+
+    .pub-title {
+      color: var(--white);
+      font-size: 1.1rem;
+      font-weight: 600;
+      line-height: 1.4;
+    }
+
+    .pub-venue {
+      font-style: italic;
+      color: var(--muted);
+      font-size: .95rem;
+      margin-top: .3rem;
+    }
+
+    /* ─── EDUCATION ─── */
+    .edu-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .edu-card {
+      border: 1px solid var(--border);
+      padding: 2rem;
+      position: relative;
+      transition: border-color .3s;
+    }
+
+    .edu-card:hover {
+      border-color: var(--accent);
+    }
+
+    .edu-degree {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.5rem;
+      letter-spacing: .05em;
+      color: var(--white);
+      line-height: 1.1;
+      margin-bottom: .5rem;
+    }
+
+    .edu-school {
+      font-style: italic;
+      color: var(--accent);
+      font-size: 1rem;
+      margin-bottom: .4rem;
+    }
+
+    .edu-year {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+    }
+
+    .edu-highlight {
+      position: absolute;
+      top: 1.5rem;
+      right: 1.5rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .6rem;
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+      padding: .2rem .6rem;
+      letter-spacing: .08em;
+    }
+
+    /* ─── CONTACT ─── */
+    .contact {
+      background: var(--bg);
+      text-align: center;
+      padding: 8rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .contact-bg-text {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 18vw;
+      color: transparent;
+      -webkit-text-stroke: 1px var(--dim);
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      white-space: nowrap;
+      pointer-events: none;
+      opacity: .4;
+    }
+
+    .contact-inner {
+      position: relative;
+      z-index: 2;
+    }
+
+    .contact-intro {
+      font-style: italic;
+      font-size: 1.4rem;
+      color: var(--muted);
+      max-width: 600px;
+      margin: 0 auto 2.5rem;
+      line-height: 1.7;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+      margin-top: 2rem;
+    }
+
+    .contact-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .72rem;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+      border-bottom: 1px solid var(--dim);
+      padding-bottom: .2rem;
+      transition: color .2s, border-color .2s;
+    }
+
+    .contact-link:hover {
+      color: var(--accent);
+      border-color: var(--accent);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      padding: 2rem 5rem;
+      border-top: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    footer span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      color: var(--dim);
+      letter-spacing: .08em;
+    }
+
+    /* ─── ANIMATIONS ─── */
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(24px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+
+      to {
+        opacity: 1;
+      }
+    }
+
+    /* Cursor dot */
+    .cursor {
+      position: fixed;
+      width: 8px;
+      height: 8px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: transform .1s, width .3s, height .3s, opacity .3s;
+    }
+
+    .cursor-ring {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border: 1px solid var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 10000;
+      transform: translate(-50%, -50%);
+      transition: transform .18s ease, width .3s, height .3s;
+    }
+
+    /* Reveal on scroll base */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity .7s, transform .7s;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: none;
+    }
+
+    /* ─── GROUPED TIMELINE ─── */
+    .tg-header {
+      margin-bottom: 1.2rem;
+    }
+
+    .tg-company {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.9rem;
+      letter-spacing: .05em;
+      color: var(--white);
+      line-height: 1;
+    }
+
+    .tg-span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .65rem;
+      letter-spacing: .1em;
+      color: var(--muted);
+      text-transform: uppercase;
+      margin-top: .3rem;
+    }
+
+    .tg-roles {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      border-left: 1px solid var(--dim);
+      margin-left: .5rem;
+    }
+
+    .tg-role {
+      padding: 1.2rem 0 1.2rem 1.8rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .tg-role:last-child {
+      border-bottom: none;
+    }
+
+    .tg-role-prev {
+      background: transparent;
+      opacity: .75;
+    }
+
+    .tg-role-prev:hover {
+      opacity: 1;
+    }
+
+    .tg-role-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 1rem;
+      margin-bottom: .7rem;
+      flex-wrap: wrap;
+    }
+
+    .tg-role-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+
+    .tg-role-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .08em;
+      color: var(--dim);
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .tg-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+      padding: .15rem .5rem;
+      vertical-align: middle;
+    }
+
+    .tg-link {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent3);
+      border: 1px solid var(--accent3);
+      padding: .15rem .5rem;
+      vertical-align: middle;
+    }
+
+    .tg-promo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .55rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: .15rem .5rem;
+      vertical-align: middle;
+    }
+
+    /* ─── HERO PHOTO ─── */
+    .hero-photo-wrap {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+      z-index: 2;
+      padding-top: 6rem;
+    }
+
+    .hero-photo {
+      width: 260px;
+      height: 320px;
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      background: var(--surface);
+    }
+
+    .hero-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border: 1px solid var(--dim);
+      margin: 8px;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .hero-photo::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--accent), transparent);
+      z-index: 3;
+    }
+
+    .hero-photo-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: .8rem;
+      color: var(--dim);
+      cursor: pointer;
+      transition: color .2s;
+    }
+
+    .hero-photo-placeholder:hover {
+      color: var(--muted);
+    }
+
+    .photo-icon {
+      opacity: .5;
+    }
+
+    .photo-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .photo-upload-btn {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      padding: .4rem 1rem;
+      cursor: pointer;
+      transition: background .2s, color .2s;
+    }
+
+    .photo-upload-btn:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+
+    .hero-photo-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      nav {
+        padding: 1.2rem 1.5rem;
+      }
+
+      .nav-links {
+        display: none;
+      }
+
+      .hero {
+        grid-template-columns: 1fr;
+        min-height: auto;
+        padding-top: 6rem;
+      }
+
+      .hero-right {
+        display: none;
+      }
+
+      .hero-left {
+        padding: 4rem 2rem 4rem;
+      }
+
+      section {
+        padding: 5rem 2rem;
+      }
+
+      .about {
+        grid-template-columns: 1fr;
+        gap: 3rem;
+      }
+
+      .about-left {
+        position: static;
+      }
+
+      .achievements-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .edu-grid {
+        grid-template-columns: 1fr;
+      }
+
+      footer {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- NAV -->
+  <nav id="nav">
+    <a class="nav-logo" href="#">M·G</a>
+    <ul class="nav-links">
+      <li><a href="#about">About</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#research">Research</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <div class="hero-left">
+      <p class="hero-eyebrow">AI Engineer · Researcher · PhD Candidate</p>
+      <h1 class="hero-name">
+        Manuel<span>Gozzi</span>
+      </h1>
+      <p class="hero-tagline">Bridging the frontier between symbolic intelligence and neural perception — in research
+        and in production.</p>
+      <div class="hero-cta">
+        <a href="#experience" class="btn filled">View Work</a>
+        <a href="#contact" class="btn">Get In Touch</a>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <div class="hero-photo-wrap">
+        <div class="hero-photo" id="heroPhoto">
+          <img src="photo.png" alt="Manuel Gozzi" style="width:100%; height:100%; object-fit:cover; display:block;">
+        </div>
+        <div class="hero-photo-tag">Bologna · Italy</div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat-card">
+          <div class="stat-number">9+</div>
+          <div class="stat-label">Years in engineering</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">6</div>
+          <div class="stat-label">Published papers</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">96%</div>
+          <div class="stat-label">F1-Score pipeline</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">172k</div>
+          <div class="stat-label">Daily docs processed</div>
+        </div>
+      </div>
+    </div><!-- /hero-right -->
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="about">
+      <div class="about-left">
+        <p class="section-tag">Who I am</p>
+        <h2 class="section-title">Engineer by trade, researcher by conviction.</h2>
+        <div class="skills-grid">
+          <span class="skill-tag">Large Language Models</span>
+          <span class="skill-tag">Neuro-Symbolic AI</span>
+          <span class="skill-tag">MLOps</span>
+          <span class="skill-tag">NLP</span>
+          <span class="skill-tag">PyTorch</span>
+          <span class="skill-tag">vLLM</span>
+          <span class="skill-tag">Poincaré Embeddings</span>
+          <span class="skill-tag">Knowledge Graphs</span>
+          <span class="skill-tag">Google Cloud</span>
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">RAG Systems</span>
+          <span class="skill-tag">Fine-Tuning</span>
+          <span class="skill-tag">LoRA / QLoRA</span>
+        </div>
+      </div>
+      <div class="about-body reveal">
+        <p>
+          I'm a <em>software engineer turned AI researcher</em>, with over nine years of hands-on experience building
+          systems that scale — from e-invoicing platforms processing millions of documents for Italian public
+          administration, to production LLM pipelines handling <strong>172,000+ insurance documents daily</strong>.
+        </p>
+        <p>
+          Today I work at <em>Leithà (Unipol Group)</em>, where I lead the development of specialized extraction and
+          classification pipelines powered by fine-tuned language models. My work bridges the gap between cutting-edge
+          AI research and high-throughput production systems.
+        </p>
+        <p>
+          As a <em>PhD candidate at Università Guglielmo Marconi</em>, I investigate <strong>neuro-symbolic
+            approaches</strong> to natural language understanding — specifically how hyperbolic geometry and symbolic
+          knowledge structures can augment neural representations. My flagship project, <em>JENeSyM</em>, integrates
+          WordNet with neural embeddings in a Poincaré manifold.
+        </p>
+        <p>
+          I've collaborated with Professor Guido Vetere on AI systems presented at IEEE MetroXRAINE and HHAI 2023, and I
+          lecture on educational technologies at the postgraduate level. Research and engineering are not opposites for
+          me — <strong>they are the same conversation</strong>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EXPERIENCE -->
+  <section class="experience" id="experience">
+    <p class="section-tag">Career</p>
+    <h2 class="section-title">Where I've built things.</h2>
+
+    <div class="timeline">
+
+      <!-- ── Leithà | Unipol Group ── -->
+      <div class="timeline-group timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="tg-header">
+          <div class="tg-company">Leithà | Unipol Group</div>
+          <div class="tg-span">JUL 2023 — PRESENT · Bologna</div>
+        </div>
+        <div class="tg-roles">
+
+          <div class="tg-role">
+            <div class="tg-role-header">
+              <span class="tg-role-title">AI Engineer <span class="tg-badge">Current</span><span class="tg-promo">↑
+                  Promoted</span></span>
+              <span class="tg-role-period">APR 2024 — PRESENT</span>
+            </div>
+            <div class="timeline-desc">
+              Led end-to-end development of a specialized extraction pipeline using fine-tuned Qwen 3 8B, achieving 94%
+              Precision and 96.4% F1-Score on complex insurance documents. Optimized for high-throughput production with
+              vLLM — 172k+ documents processed daily through a cascaded classification and extraction
+              architecture.<br><br>
+              Developed a CPU-based binary classifier (100ms latency) whose output aligns with Gemini 2.5 Pro on 82% of
+              classifications. Built RAG systems, Text-to-SQL engines, and document intelligence platforms deployed on
+              GCP and AWS.
+            </div>
+            <div class="timeline-tech">
+              <span class="tech-pill">Qwen 3</span>
+              <span class="tech-pill">vLLM</span>
+              <span class="tech-pill">LoRA</span>
+              <span class="tech-pill">GCP</span>
+              <span class="tech-pill">AWS</span>
+              <span class="tech-pill">RAG</span>
+              <span class="tech-pill">PyTorch</span>
+              <span class="tech-pill">Terraform</span>
+              <span class="tech-pill">MongoDB</span>
+            </div>
+          </div>
+
+          <div class="tg-role tg-role-prev">
+            <div class="tg-role-header">
+              <span class="tg-role-title">Software Engineer</span>
+              <span class="tg-role-period">JUL 2023 — MAR 2024</span>
+            </div>
+            <div class="timeline-desc">
+              Within a cross-functional team of 10, developed a web application for insurance price estimation
+              generating an annual margin exceeding €20 million. Architected Kafka consumers for data enrichment and
+              built a mathematical formula parser for the actuarial department.
+            </div>
+            <div class="timeline-tech">
+              <span class="tech-pill">Java 17</span>
+              <span class="tech-pill">Spring Boot</span>
+              <span class="tech-pill">MongoDB</span>
+              <span class="tech-pill">Kafka</span>
+              <span class="tech-pill">Kubernetes</span>
+              <span class="tech-pill">OpenShift</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Università Guglielmo Marconi ── -->
+      <div class="timeline-group timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="tg-header">
+          <div class="tg-company">Università degli Studi "Guglielmo Marconi"</div>
+          <div class="tg-span">OCT 2025 — NOV 2025 · Rome</div>
+        </div>
+        <div class="tg-roles">
+          <div class="tg-role">
+            <div class="tg-role-header">
+              <span class="tg-role-title">Adjunct Lecturer</span>
+              <span class="tg-role-period">OCT 2025 — NOV 2025</span>
+            </div>
+            <div class="timeline-desc">
+              Delivered synchronous online instruction in Educational Methodologies and Technologies within the 30 CFU
+              Teacher Training Program, focusing on innovative laboratory didactics for secondary education teachers.
+            </div>
+            <div class="timeline-tech">
+              <span class="tech-pill">Educational Tech</span>
+              <span class="tech-pill">Didactics</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Isagog ── -->
+      <div class="timeline-group timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="tg-header">
+          <div class="tg-company">Isagog</div>
+          <div class="tg-span">APR 2022 — JUN 2023 · Rome</div>
+        </div>
+        <div class="tg-roles">
+          <div class="tg-role">
+            <div class="tg-role-header">
+              <span class="tg-role-title">Research Software Engineer</span>
+              <span class="tg-role-period">APR 2022 — JUN 2023</span>
+            </div>
+            <div class="timeline-desc">
+              Developed "VOICE First" — an AI agent that listens to help-desk conversations in real time and provides
+              operator suggestions, in collaboration with Prof. Guido Vetere. The system employs a high-level
+              neuro-symbolic architecture combining ontology reasoning (Openllet) with deep neural networks for voice
+              understanding. Results published at IEEE MetroXRAINE and HHAI 2023.
+            </div>
+            <div class="timeline-tech">
+              <span class="tech-pill">Neuro-Symbolic AI</span>
+              <span class="tech-pill">OWL Ontologies</span>
+              <span class="tech-pill">Apache Jena</span>
+              <span class="tech-pill">SPARQL</span>
+              <span class="tech-pill">Python</span>
+              <span class="tech-pill">GPT-3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── CINECA ── -->
+      <div class="timeline-group timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="tg-header">
+          <div class="tg-company">CINECA</div>
+          <div class="tg-span">JUL 2021 — JUL 2023 · Casalecchio di Reno</div>
+        </div>
+        <div class="tg-roles">
+
+          <div class="tg-role">
+            <div class="tg-role-header">
+              <span class="tg-role-title">Lead Software Engineer <span class="tg-promo">↑ Promoted</span></span>
+              <span class="tg-role-period">SEP 2022 — JUL 2023</span>
+            </div>
+            <div class="timeline-desc">
+              Promoted after consistently exceeding expectations. Led development of an AI-powered support ticket
+              classification and routing system integrating with JIRA. Architected a microservices framework in Java 17,
+              Python, and Camunda BPM for managing public tender evaluations, with YAML-configurable behavior and UI.
+              Mentored junior colleagues.
+            </div>
+            <div class="timeline-tech">
+              <span class="tech-pill">Java 17</span>
+              <span class="tech-pill">Camunda BPM</span>
+              <span class="tech-pill">Quarkus</span>
+              <span class="tech-pill">TensorFlow</span>
+              <span class="tech-pill">Vue.js</span>
+              <span class="tech-pill">Kubernetes</span>
+            </div>
+          </div>
+
+          <div class="tg-role tg-role-prev">
+            <div class="tg-role-header">
+              <span class="tg-role-title">Software Engineer</span>
+              <span class="tg-role-period">JUL 2021 — AUG 2022</span>
+            </div>
+            <div class="timeline-desc">
+              Developed an internal microservices-based framework for managing public tenders, built as a low-code
+              solution with YAML-configurable behavior and UI. The multi-tenant system, supporting over 7 tenants and
+              ~10,000 applications, ensured maximum control over tenders and workflows.
+            </div>
+            <div class="timeline-tech">
+              <span class="tech-pill">Java 11</span>
+              <span class="tech-pill">Spring Boot</span>
+              <span class="tech-pill">Quarkus</span>
+              <span class="tech-pill">Vue.js</span>
+              <span class="tech-pill">MongoDB</span>
+              <span class="tech-pill">Kubernetes</span>
+              <span class="tech-pill">Keycloak</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- ── Engineering SpA ── -->
+      <div class="timeline-group timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="tg-header">
+          <div class="tg-company">Engineering Ingegneria Informatica SpA</div>
+          <div class="tg-span">NOV 2018 — JUN 2021 · Bologna</div>
+        </div>
+        <div class="tg-roles">
+          <div class="tg-role">
+            <div class="tg-role-header">
+              <span class="tg-role-title">Software Engineer</span>
+              <span class="tg-role-period">NOV 2018 — JUN 2021</span>
+            </div>
+            <div class="timeline-desc">
+              Developed NoTI-ER — the first Italian solution to fully adopt PEPPOL standards — an e-invoicing platform
+              processing ~10 million documents for Italian Public Administrations with 98%+ uptime. Traveled to Belgium
+              to maintain PEPPOL compliance. Deep expertise in XML, XSLT, and enterprise Java architecture.
+            </div>
+            <div class="timeline-tech">
+              <span class="tech-pill">Java</span>
+              <span class="tech-pill">Spring</span>
+              <span class="tech-pill">PEPPOL</span>
+              <span class="tech-pill">XSLT 2.0</span>
+              <span class="tech-pill">SQL</span>
+              <span class="tech-pill">SAML2</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Toyota ── -->
+      <div class="timeline-group timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="tg-header">
+          <div class="tg-company">Toyota Material Handling Manufacturing Italy SpA</div>
+          <div class="tg-span">AUG 2017 — OCT 2018 · Bologna</div>
+        </div>
+        <div class="tg-roles">
+          <div class="tg-role">
+            <div class="tg-role-header">
+              <span class="tg-role-title">Software Developer &amp; Analyst</span>
+              <span class="tg-role-period">AUG 2017 — OCT 2018</span>
+            </div>
+            <div class="timeline-desc">
+              Developed various modules for the company's new ERP system, Oracle JD Edwards 9. Participated in
+              collaborative development and analysis sessions as part of a team of 15. Gained in-depth experience with
+              SQL technologies, Kanban methodology, and the Toyota Production System.
+            </div>
+            <div class="timeline-tech">
+              <span class="tech-pill">Oracle JD Edwards 9</span>
+              <span class="tech-pill">SQL</span>
+              <span class="tech-pill">Kanban</span>
+              <span class="tech-pill">TPS</span>
+              <span class="tech-pill">Functional Analysis</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── Mobimentum ── -->
+      <div class="timeline-group timeline-item">
+        <div class="timeline-dot"></div>
+        <div class="tg-header">
+          <div class="tg-company">Mobimentum</div>
+          <div class="tg-span">JUN 2017 — JUL 2017 · Casalecchio di Reno</div>
+        </div>
+        <div class="tg-roles">
+          <div class="tg-role">
+            <div class="tg-role-header">
+              <span class="tg-role-title">Software Developer <span class="tg-badge"
+                  style="color:var(--muted);border-color:var(--dim);">Internship</span></span>
+              <span class="tg-role-period">JUN 2017 — JUL 2017</span>
+            </div>
+            <div class="timeline-desc">
+              Developed a web application based on Java 8, Spring Framework, and JHipster — a platform enabling a group
+              of entrepreneurs to communicate through structured question answering.
+            </div>
+            <div class="timeline-tech">
+              <span class="tech-pill">Java SE 8</span>
+              <span class="tech-pill">Spring 4</span>
+              <span class="tech-pill">JHipster</span>
+              <span class="tech-pill">Angular.js</span>
+              <span class="tech-pill">RESTful</span>
+              <span class="tech-pill">CSS3</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- ACHIEVEMENTS -->
+  <section id="achievements">
+    <p class="section-tag reveal">Impact</p>
+    <h2 class="section-title reveal">Results I've delivered.</h2>
+
+    <div class="achievements-grid">
+      <div class="achievement-card reveal">
+        <span class="achievement-icon">⚡</span>
+        <div class="achievement-metric">172k+</div>
+        <div class="achievement-title">Documents Processed Daily</div>
+        <div class="achievement-desc">At <strong>Leithà | Unipol Group</strong>, I designed and deployed a cascaded LLM
+          architecture that processes over 172,000 insurance documents every day in production — reliably and at scale.
+        </div>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="achievement-icon">🎯</span>
+        <div class="achievement-metric">96.4%</div>
+        <div class="achievement-title">F1-Score on Extraction</div>
+        <div class="achievement-desc">By fine-tuning Qwen 3 8B on domain-specific data at <strong>Leithà</strong>, I
+          achieved 94% Precision and a 96.4% F1-Score on structured extraction from complex insurance documents.</div>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="achievement-icon">💶</span>
+        <div class="achievement-metric">€500k</div>
+        <div class="achievement-title">Simulated Net Profit</div>
+        <div class="achievement-desc">At <strong>Leithà</strong>, an AI text-mining pipeline I built to analyse
+          insurance appraisals led to pricing model revisions that generated a simulated net gain of €500k on fire and
+          atmospheric guarantees.</div>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="achievement-icon">📋</span>
+        <div class="achievement-metric">10M+</div>
+        <div class="achievement-title">Documents — 98% Uptime</div>
+        <div class="achievement-desc">At <strong>Engineering SpA</strong>, I helped build NoTI-ER — the first Italian
+          platform fully compliant with PEPPOL — processing ~10 million e-invoicing documents for public administrations
+          with over 98% uptime.</div>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="achievement-icon">💰</span>
+        <div class="achievement-metric">€20M+</div>
+        <div class="achievement-title">Annual Margin Generated</div>
+        <div class="achievement-desc">As part of a 10-person team at <strong>Leithà</strong>, I co-developed an
+          insurance price estimation platform that now generates an annual margin exceeding €20 million for the Unipol
+          Group.</div>
+      </div>
+      <div class="achievement-card reveal">
+        <span class="achievement-icon">🏎</span>
+        <div class="achievement-metric">100ms</div>
+        <div class="achievement-title">CPU Classifier — Gemini-Level Accuracy</div>
+        <div class="achievement-desc">At <strong>Leithà</strong>, I developed a binary classifier running entirely on
+          CPU with 100ms latency whose decisions align with Gemini 2.5 Pro on 82% of cases — at a fraction of the
+          inference cost.</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- RESEARCH -->
+  <section class="research" id="research">
+    <p class="section-tag">Academia</p>
+    <h2 class="section-title">Research & Publications.</h2>
+
+    <div class="pub-list">
+      <div class="pub-item">
+        <span class="pub-index">06</span>
+        <div>
+          <div class="pub-title">Bidirectional Emotional Influence in Human–LLM Interaction: Empirical Analysis and
+            Methodological Framework</div>
+          <div class="pub-venue">CLiC-it 2025 Conference</div>
+          <a class="tg-link" href="https://aclanthology.org/2025.clicit-1.48.pdf"
+            target="_blank">https://aclanthology.org/2025.clicit-1.48.pdf</a>
+        </div>
+        <span class="pub-badge conf">CLiC-it</span>
+      </div>
+      <div class="pub-item">
+        <span class="pub-index">05</span>
+        <div>
+          <div class="pub-title">Degradation of Multi-Task Prompting Across Six NLP Tasks and LLM Families</div>
+          <div class="pub-venue">Q2 Journal</div>
+          <a class="tg-link" href="https://doi.org/10.3390/electronics14214349" target="_blank">
+            https://doi.org/10.3390/electronics14214349
+          </a>
+        </div>
+        <span class="pub-badge q2">Q2</span>
+      </div>
+      <div class="pub-item">
+        <span class="pub-index">04</span>
+        <div>
+          <div class="pub-title">Comparative Analysis of Prompt Strategies for Large Language Models: Single-Task vs.
+            Multitask Prompts</div>
+          <div class="pub-venue">Q2 Journal</div>
+          <a class="tg-link" href="https://doi.org/10.3390/electronics13234712"
+            target="_blank">https://doi.org/10.3390/electronics13234712</a>
+        </div>
+        <span class="pub-badge q2">Q2</span>
+      </div>
+      <div class="pub-item">
+        <span class="pub-index">03</span>
+        <div>
+          <div class="pub-title">Puzzle Pattern — A Systematic Approach to Multiple Behavioral Inheritance
+            Implementation in Object-Oriented Programming</div>
+          <div class="pub-venue">Q1 Journal</div>
+          <a class="tg-link" href="https://doi.org/10.3390/app14125083"
+            target="_blank">https://doi.org/10.3390/app14125083</a>
+        </div>
+        <span class="pub-badge q1">Q1</span>
+      </div>
+      <div class="pub-item">
+        <span class="pub-index">02</span>
+        <div>
+          <div class="pub-title">VOICE-FIRST: Supporting Human Assistants with Real-time Voice Understanding</div>
+          <div class="pub-venue">IEEE MetroXRAINE 2022 — Strong Accepted</div>
+          <a class="tg-link" href="https://ieeexplore.ieee.org/abstract/document/10405568"
+            target="_blank">https://ieeexplore.ieee.org/abstract/document/10405568</a>
+        </div>
+        <span class="pub-badge conf">IEEE</span>
+      </div>
+      <div class="pub-item">
+        <span class="pub-index">01</span>
+        <div>
+          <div class="pub-title">Assisting the Assistant: A Cobot for Voice Customer Support</div>
+          <div class="pub-venue">HHAI 2023 — Accepted</div>
+          <a class="tg-link" href="https://ebooks.iospress.nl/volumearticle/63344"
+            target="_blank">https://ebooks.iospress.nl/volumearticle/63344</a>
+        </div>
+        <span class="pub-badge conf">HHAI</span>
+
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- EDUCATION -->
+  <section id="education">
+    <p class="section-tag reveal">Formation</p>
+    <h2 class="section-title reveal">Education.</h2>
+
+    <div class="edu-grid">
+      <div class="edu-card reveal">
+        <span class="edu-highlight">CURRENT</span>
+        <div class="edu-degree">PhD — Physical & Engineering Sciences for Innovation and Sustainability</div>
+        <div class="edu-school">Università degli Studi "Guglielmo Marconi"</div>
+        <div class="edu-year">NOV 2025 — PRESENT</div>
+      </div>
+
+      <div class="edu-card reveal">
+        <div class="edu-degree">MSc — Computer Engineering, Digital Transformation & Data Science</div>
+        <div class="edu-school">Università degli Studi "Guglielmo Marconi"</div>
+        <div class="edu-year">AUG 2023 — MAY 2025</div>
+      </div>
+
+      <div class="edu-card reveal">
+        <div class="edu-degree">BSc — Computer Engineering</div>
+        <div class="edu-school">Università degli Studi "Guglielmo Marconi"</div>
+        <div class="edu-year">MAR 2019 — MAR 2022</div>
+      </div>
+
+      <div class="edu-card reveal">
+        <div class="edu-degree">Diploma — Business Information Systems</div>
+        <div class="edu-school">I.T.C. Pier Crescenzi, Bologna</div>
+        <div class="edu-year">2011 — 2016</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <!-- CONTACT -->
+  <section class="contact" id="contact">
+    <div class="contact-bg-text">HELLO</div>
+    <div class="contact-inner">
+      <p class="section-tag">Let's talk</p>
+      <h2 class="section-title">Get in touch.</h2>
+      <p class="contact-intro">
+        Whether it's research collaboration, AI engineering challenges, or a conversation about neuro-symbolic systems —
+        I'm always open to a good exchange of ideas.
+      </p>
+      <a href="/cdn-cgi/l/email-protection#1b7c746161727c7c5b7c767a727735787476" class="btn filled"><span
+          class="__cf_email__" data-cfemail="61060e1b1b08060621060c00080d4f020e0c">[email&#160;protected]</span></a>
+      <div class="contact-links">
+        <a href="https://www.linkedin.com/in/manuelgozzi" class="contact-link" target="_blank">LinkedIn</a>
+        <a href="https://scholar.google.com/citations" class="contact-link" target="_blank">Google Scholar</a>
+        <a href="https://www.researchgate.net/profile/Manuel-Gozzi" class="contact-link"
+          target="_blank">ResearchGate</a>
+        <a href="https://orcid.org/0009-0003-9487-7160" class="contact-link" target="_blank">ORCID</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <span>© 2026 Manuel Gozzi — San Giorgio di Piano, Emilia-Romagna</span>
+    <span>Built with precision · Driven by curiosity</span>
+  </footer>
+
+  <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
+  <script>
+    // ─── Custom cursor ───
+    const cursor = document.getElementById('cursor');
+    const ring = document.getElementById('cursorRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      cursor.style.left = mx + 'px';
+      cursor.style.top = my + 'px';
+    });
+
+    (function animRing() {
+      rx += (mx - rx) * .12;
+      ry += (my - ry) * .12;
+      ring.style.left = rx + 'px';
+      ring.style.top = ry + 'px';
+      requestAnimationFrame(animRing);
+    })();
+
+    document.querySelectorAll('a, button, .achievement-card').forEach(el => {
+      el.addEventListener('mouseenter', () => {
+        cursor.style.width = '14px';
+        cursor.style.height = '14px';
+        ring.style.width = '48px';
+        ring.style.height = '48px';
+      });
+      el.addEventListener('mouseleave', () => {
+        cursor.style.width = '8px';
+        cursor.style.height = '8px';
+        ring.style.width = '32px';
+        ring.style.height = '32px';
+      });
+    });
+
+    // ─── Nav scroll ───
+    window.addEventListener('scroll', () => {
+      document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ─── Scroll reveal ───
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) e.target.classList.add('visible');
+      });
+    }, { threshold: 0.12 });
+
+    document.querySelectorAll('.reveal, .timeline-item, .pub-item').forEach(el => observer.observe(el));
+
+    // ─── Stagger timeline items ───
+    document.querySelectorAll('.timeline-item').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.08) + 's';
+    });
+
+    document.querySelectorAll('.pub-item').forEach((el, i) => {
+      el.style.transitionDelay = (i * 0.07) + 's';
+    });
+  </script>
+</body>
+
+</html>
