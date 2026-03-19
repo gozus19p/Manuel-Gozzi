@@ -1084,7 +1084,7 @@
       </div>
       <div class="hero-stats">
         <div class="stat-card">
-          <div class="stat-number">9+</div>
+          <div class="stat-number" id="yearsInEngineering">9+</div>
           <div class="stat-label">Years in engineering</div>
         </div>
         <div class="stat-card">
@@ -1130,7 +1130,8 @@
       </div>
       <div class="about-body reveal">
         <p>
-          I'm a <em>software engineer turned AI researcher</em>, with over nine years of hands-on experience building
+          I'm a <em>software engineer turned AI researcher</em>, with over <span id="yearsInText">nine</span> years of
+          hands-on experience building
           systems that scale — from e-invoicing platforms processing millions of documents for Italian public
           administration, to production LLM pipelines handling <strong>172,000+ insurance documents daily</strong>.
         </p>
@@ -1636,6 +1637,36 @@
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
+    // ─── Calculate years of experience ───
+    function calculateYearsOfExperience() {
+      const startDate = new Date('2017-06-01');
+      const today = new Date();
+      let yearsOfExperience = today.getFullYear() - startDate.getFullYear();
+      const monthDifference = today.getMonth() - startDate.getMonth();
+      const dayDifference = today.getDate() - startDate.getDate();
+
+      // If the birthday hasn't occurred this year, subtract one year
+      if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
+        yearsOfExperience--;
+      }
+
+      return yearsOfExperience;
+    }
+
+    // Apply calculated years to the DOM
+    const yearsExp = calculateYearsOfExperience();
+    const yearsInEngineeringEl = document.getElementById('yearsInEngineering');
+    const yearsInTextEl = document.getElementById('yearsInText');
+
+    if (yearsInEngineeringEl) {
+      yearsInEngineeringEl.textContent = yearsExp + '+';
+    }
+
+    if (yearsInTextEl) {
+      const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen'];
+      yearsInTextEl.textContent = (yearsExp <= 15 ? numberWords[yearsExp] : yearsExp);
+    }
+
     // ─── Custom cursor ───
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
