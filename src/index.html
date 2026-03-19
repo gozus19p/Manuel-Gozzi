@@ -960,58 +960,325 @@
       z-index: 3;
     }
 
-    .hero-photo-placeholder {
-      width: 100%;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      gap: .8rem;
-      color: var(--dim);
-      cursor: pointer;
-      transition: color .2s;
-    }
-
-    .hero-photo-placeholder:hover {
-      color: var(--muted);
-    }
-
-    .photo-icon {
-      opacity: .5;
-    }
-
-    .photo-label {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .62rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--muted);
-    }
-
-    .photo-upload-btn {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .62rem;
-      letter-spacing: .1em;
-      text-transform: uppercase;
-      color: var(--accent);
-      border: 1px solid var(--accent);
-      padding: .4rem 1rem;
-      cursor: pointer;
-      transition: background .2s, color .2s;
-    }
-
-    .photo-upload-btn:hover {
-      background: var(--accent);
-      color: var(--bg);
-    }
-
     .hero-photo-tag {
       font-family: 'JetBrains Mono', monospace;
       font-size: .62rem;
       letter-spacing: .15em;
       text-transform: uppercase;
       color: var(--muted);
+    }
+
+    /* ─── CAREER OVERVIEW CHART ─── */
+    .career-overview {
+      margin-bottom: 4rem;
+      padding: 2.5rem;
+      border: 1px solid var(--border);
+      background: var(--bg);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .career-overview::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent2), transparent);
+    }
+
+    .co-header {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      margin-bottom: 1.8rem;
+      flex-wrap: wrap;
+      gap: .5rem;
+    }
+
+    .co-title {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .62rem;
+      letter-spacing: .2em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .co-legend {
+      display: flex;
+      gap: 1.4rem;
+      flex-wrap: wrap;
+    }
+
+    .co-legend-item {
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .52rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: .07em;
+    }
+
+    .co-legend-swatch {
+      width: 14px;
+      height: 8px;
+      border-radius: 1px;
+      flex-shrink: 0;
+    }
+
+    /* axis */
+    .co-axis-wrap {
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .co-label-col {
+      width: 130px;
+      flex-shrink: 0;
+    }
+
+    .co-chart-col {
+      flex: 1;
+      position: relative;
+    }
+
+    .co-axis-years {
+      position: relative;
+      height: 26px;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 6px;
+    }
+
+    .co-year-tick {
+      position: absolute;
+      bottom: 0;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 3px;
+    }
+
+    .co-year-tick span {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .52rem;
+      color: var(--dim);
+      letter-spacing: .04em;
+    }
+
+    .co-year-tick::after {
+      content: '';
+      display: block;
+      width: 1px;
+      height: 5px;
+      background: var(--dim);
+    }
+
+    /* lanes */
+    .co-lanes {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      position: relative;
+    }
+
+    .co-lane-row {
+      display: flex;
+      align-items: center;
+      height: 32px;
+    }
+
+    .co-lane-label {
+      width: 130px;
+      flex-shrink: 0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .53rem;
+      letter-spacing: .05em;
+      color: var(--muted);
+      text-transform: uppercase;
+      text-align: right;
+      padding-right: 12px;
+      line-height: 1.3;
+    }
+
+    .co-track {
+      flex: 1;
+      height: 100%;
+      position: relative;
+    }
+
+    /* grid lines behind bars */
+    .co-grid-lines {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+
+    .co-grid-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--dim);
+      opacity: .3;
+    }
+
+    .co-bar {
+      position: absolute;
+      top: 3px;
+      bottom: 3px;
+      border-radius: 1px;
+      display: flex;
+      align-items: center;
+      padding: 0 7px;
+      overflow: hidden;
+      cursor: default;
+      transition: filter .2s, top .12s, bottom .12s;
+    }
+
+    .co-bar:hover {
+      filter: brightness(1.35);
+      top: 0;
+      bottom: 0;
+      z-index: 20;
+    }
+
+    .co-bar-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .51rem;
+      letter-spacing: .04em;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      font-weight: 500;
+      pointer-events: none;
+    }
+
+    .co-bar.eng {
+      background: #1d1a12;
+      border: 1px solid #c8a96e55;
+    }
+
+    .co-bar.eng .co-bar-text {
+      color: var(--accent);
+    }
+
+    .co-bar.res {
+      background: #111d19;
+      border: 1px solid #7ec8a944;
+    }
+
+    .co-bar.res .co-bar-text {
+      color: var(--accent2);
+    }
+
+    .co-bar.phd {
+      background: #18121d;
+      border: 1px solid #a97ec844;
+    }
+
+    .co-bar.phd .co-bar-text {
+      color: var(--accent3);
+    }
+
+    .co-bar.edu {
+      background: #171714;
+      border: 1px solid #4a4840;
+    }
+
+    .co-bar.edu .co-bar-text {
+      color: var(--muted);
+    }
+
+    /* today line */
+    .co-today-line {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--accent);
+      opacity: .45;
+      pointer-events: none;
+      z-index: 4;
+    }
+
+    .co-today-label {
+      position: absolute;
+      top: -20px;
+      transform: translateX(-50%);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .5rem;
+      color: var(--accent);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      z-index: 4;
+    }
+
+    /* tooltip */
+    .co-tooltip {
+      position: fixed;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-top: 2px solid var(--accent);
+      padding: .85rem 1rem;
+      pointer-events: none;
+      opacity: 0;
+      transition: opacity .12s;
+      z-index: 9999;
+      min-width: 220px;
+      max-width: 300px;
+    }
+
+    .co-tooltip.visible {
+      opacity: 1;
+    }
+
+    .co-tt-role {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: .06em;
+      color: var(--white);
+      line-height: 1;
+      margin-bottom: .3rem;
+    }
+
+    .co-tt-company {
+      font-style: italic;
+      font-family: 'Cormorant Garamond', serif;
+      color: var(--accent);
+      font-size: .95rem;
+      margin-bottom: .3rem;
+    }
+
+    .co-tt-period {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .55rem;
+      color: var(--muted);
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      padding-bottom: .45rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: .45rem;
+    }
+
+    .co-tt-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .28rem;
+    }
+
+    .co-tt-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: .49rem;
+      padding: .12rem .45rem;
+      background: var(--dim);
+      color: var(--muted);
+      letter-spacing: .04em;
+      border-radius: 1px;
     }
 
     /* ─── RESPONSIVE ─── */
@@ -1063,6 +1330,15 @@
         flex-direction: column;
         gap: 1rem;
         text-align: center;
+      }
+
+      .co-lane-label {
+        width: 90px;
+        font-size: .46rem;
+      }
+
+      .career-overview {
+        padding: 1.5rem;
       }
     }
   </style>
@@ -1126,7 +1402,7 @@
           <div class="stat-label">Daily docs processed</div>
         </div>
       </div>
-    </div><!-- /hero-right -->
+    </div>
   </section>
 
   <div class="divider"></div>
@@ -1157,9 +1433,9 @@
       <div class="about-body reveal">
         <p>
           I'm a <em>software engineer turned AI researcher</em>, with over <span id="yearsInText">nine</span> years of
-          hands-on experience building
-          systems that scale — from e-invoicing platforms processing millions of documents for Italian public
-          administration, to production LLM pipelines handling <strong>172,000+ insurance documents daily</strong>.
+          hands-on experience building systems that scale — from e-invoicing platforms processing millions of documents
+          for Italian public administration, to production LLM pipelines handling
+          <strong>172,000+ insurance documents daily</strong>.
         </p>
         <p>
           Today I work at <em>Leithà (Unipol Group)</em>, where I lead the development of specialized extraction and
@@ -1188,6 +1464,41 @@
     <p class="section-tag">Career</p>
     <h2 class="section-title">Where I've built things.</h2>
 
+    <!-- ══════════════════════════════════════════════
+         CAREER OVERVIEW GANTT CHART
+    ══════════════════════════════════════════════ -->
+    <div class="career-overview reveal" id="careerOverview">
+      <div class="co-header">
+        <span class="co-title">Career at a glance · 2017 — present</span>
+        <div class="co-legend">
+          <div class="co-legend-item">
+            <div class="co-legend-swatch" style="background:#1d1a12;border:1px solid #c8a96e55;"></div>Engineering
+          </div>
+          <div class="co-legend-item">
+            <div class="co-legend-swatch" style="background:#111d19;border:1px solid #7ec8a944;"></div>AI Research
+          </div>
+          <div class="co-legend-item">
+            <div class="co-legend-swatch" style="background:#18121d;border:1px solid #a97ec844;"></div>PhD / Academic
+          </div>
+          <div class="co-legend-item">
+            <div class="co-legend-swatch" style="background:#171714;border:1px solid #4a4840;"></div>Education
+          </div>
+        </div>
+      </div>
+
+      <!-- axis label spacer row -->
+      <div style="display:flex;">
+        <div style="width:130px;flex-shrink:0;"></div>
+        <div style="flex:1;position:relative;">
+          <div class="co-axis-years" id="coAxisYears"></div>
+        </div>
+      </div>
+
+      <!-- lanes (label + track pairs, built by JS) -->
+      <div class="co-lanes" id="coLanes"></div>
+    </div>
+    <!-- ── end career overview ── -->
+
     <div class="timeline">
 
       <!-- ── Leithà | Unipol Group ── -->
@@ -1198,7 +1509,6 @@
           <div class="tg-span">JUL 2023 — PRESENT · Bologna</div>
         </div>
         <div class="tg-roles">
-
           <div class="tg-role">
             <div class="tg-role-header">
               <span class="tg-role-title">AI Engineer <span class="tg-badge">Current</span><span class="tg-promo">↑
@@ -1226,7 +1536,6 @@
               <span class="tech-pill">MongoDB</span>
             </div>
           </div>
-
           <div class="tg-role tg-role-prev">
             <div class="tg-role-header">
               <span class="tg-role-title">Software Engineer</span>
@@ -1246,7 +1555,6 @@
               <span class="tech-pill">OpenShift</span>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -1314,7 +1622,6 @@
           <div class="tg-span">JUL 2021 — JUL 2023 · Casalecchio di Reno</div>
         </div>
         <div class="tg-roles">
-
           <div class="tg-role">
             <div class="tg-role-header">
               <span class="tg-role-title">Lead Software Engineer <span class="tg-promo">↑ Promoted</span></span>
@@ -1335,7 +1642,6 @@
               <span class="tech-pill">Kubernetes</span>
             </div>
           </div>
-
           <div class="tg-role tg-role-prev">
             <div class="tg-role-header">
               <span class="tg-role-title">Software Engineer</span>
@@ -1356,7 +1662,6 @@
               <span class="tech-pill">Keycloak</span>
             </div>
           </div>
-
         </div>
       </div>
 
@@ -1559,9 +1864,8 @@
           <div class="pub-title">Degradation of Multi-Task Prompting Across Six NLP Tasks and LLM Families</div>
           <div class="pub-venue">MDPI - Electronics - Artificial Intelligence-Driven Emerging Applications</div>
           <span class="pub-date">6th November 2025</span>
-          <a class="tg-link" href="https://doi.org/10.3390/electronics14214349" target="_blank">
-            https://doi.org/10.3390/electronics14214349
-          </a>
+          <a class="tg-link" href="https://doi.org/10.3390/electronics14214349"
+            target="_blank">https://doi.org/10.3390/electronics14214349</a>
         </div>
         <span class="pub-badge q2">Q2 Journal</span>
       </div>
@@ -1610,7 +1914,6 @@
             target="_blank">https://ebooks.iospress.nl/volumearticle/63344</a>
         </div>
         <span class="pub-badge conf">Conference</span>
-
       </div>
     </div>
   </section>
@@ -1629,19 +1932,16 @@
         <div class="edu-school">Università degli Studi "Guglielmo Marconi"</div>
         <div class="edu-year">NOV 2025 — PRESENT</div>
       </div>
-
       <div class="edu-card reveal">
         <div class="edu-degree">MSc — Computer Engineering, Digital Transformation & Data Science</div>
         <div class="edu-school">Università degli Studi "Guglielmo Marconi"</div>
         <div class="edu-year">AUG 2023 — MAY 2025</div>
       </div>
-
       <div class="edu-card reveal">
         <div class="edu-degree">BSc — Computer Engineering</div>
         <div class="edu-school">Università degli Studi "Guglielmo Marconi"</div>
         <div class="edu-year">MAR 2019 — MAR 2022</div>
       </div>
-
       <div class="edu-card reveal">
         <div class="edu-degree">Diploma — Business Information Systems</div>
         <div class="edu-school">I.T.C. Pier Crescenzi, Bologna</div>
@@ -1662,8 +1962,9 @@
         Whether it's research collaboration, AI engineering challenges, or a conversation about neuro-symbolic systems —
         I'm always open to a good exchange of ideas.
       </p>
-      <a href="/cdn-cgi/l/email-protection#1b7c746161727c7c5b7c767a727735787476" class="btn filled"><span
-          class="__cf_email__" data-cfemail="61060e1b1b08060621060c00080d4f020e0c">[email&#160;protected]</span></a>
+      <a href="/cdn-cgi/l/email-protection#1b7c746161727c7c5b7c767a727735787476" class="btn filled">
+        <span class="__cf_email__" data-cfemail="61060e1b1b08060621060c00080d4f020e0c">[email&#160;protected]</span>
+      </a>
       <div class="contact-links">
         <a href="https://www.linkedin.com/in/manuelgozzi" class="contact-link" target="_blank">LinkedIn</a>
         <a href="https://scholar.google.com/citations" class="contact-link" target="_blank">Google Scholar</a>
@@ -1686,43 +1987,30 @@
     function calculateYearsOfExperience() {
       const startDate = new Date('2017-06-01');
       const today = new Date();
-      let yearsOfExperience = today.getFullYear() - startDate.getFullYear();
-      const monthDifference = today.getMonth() - startDate.getMonth();
-      const dayDifference = today.getDate() - startDate.getDate();
-
-      // If the birthday hasn't occurred this year, subtract one year
-      if (monthDifference < 0 || (monthDifference === 0 && dayDifference < 0)) {
-        yearsOfExperience--;
-      }
-
-      return yearsOfExperience;
+      let y = today.getFullYear() - startDate.getFullYear();
+      const md = today.getMonth() - startDate.getMonth();
+      const dd = today.getDate() - startDate.getDate();
+      if (md < 0 || (md === 0 && dd < 0)) y--;
+      return y;
     }
-
-    // Apply calculated years to the DOM
     const yearsExp = calculateYearsOfExperience();
     const yearsInEngineeringEl = document.getElementById('yearsInEngineering');
     const yearsInTextEl = document.getElementById('yearsInText');
-
-    if (yearsInEngineeringEl) {
-      yearsInEngineeringEl.textContent = yearsExp + '+';
-    }
-
+    if (yearsInEngineeringEl) yearsInEngineeringEl.textContent = yearsExp + '+';
     if (yearsInTextEl) {
-      const numberWords = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen'];
-      yearsInTextEl.textContent = (yearsExp <= 15 ? numberWords[yearsExp] : yearsExp);
+      const words = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve', 'thirteen', 'fourteen', 'fifteen'];
+      yearsInTextEl.textContent = yearsExp <= 15 ? words[yearsExp] : yearsExp;
     }
 
     // ─── Custom cursor ───
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
     let mx = 0, my = 0, rx = 0, ry = 0;
-
     document.addEventListener('mousemove', e => {
       mx = e.clientX; my = e.clientY;
       cursor.style.left = mx + 'px';
       cursor.style.top = my + 'px';
     });
-
     (function animRing() {
       rx += (mx - rx) * .12;
       ry += (my - ry) * .12;
@@ -1730,20 +2018,9 @@
       ring.style.top = ry + 'px';
       requestAnimationFrame(animRing);
     })();
-
     document.querySelectorAll('a, button, .achievement-card').forEach(el => {
-      el.addEventListener('mouseenter', () => {
-        cursor.style.width = '14px';
-        cursor.style.height = '14px';
-        ring.style.width = '48px';
-        ring.style.height = '48px';
-      });
-      el.addEventListener('mouseleave', () => {
-        cursor.style.width = '8px';
-        cursor.style.height = '8px';
-        ring.style.width = '32px';
-        ring.style.height = '32px';
-      });
+      el.addEventListener('mouseenter', () => { cursor.style.width = '14px'; cursor.style.height = '14px'; ring.style.width = '48px'; ring.style.height = '48px'; });
+      el.addEventListener('mouseleave', () => { cursor.style.width = '8px'; cursor.style.height = '8px'; ring.style.width = '32px'; ring.style.height = '32px'; });
     });
 
     // ─── Nav scroll ───
@@ -1752,29 +2029,237 @@
     });
 
     // ─── Scroll reveal ───
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(e => {
-        if (e.isIntersecting) e.target.classList.add('visible');
-      });
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.12 });
-
     document.querySelectorAll('.reveal, .timeline-item, .pub-item').forEach(el => observer.observe(el));
 
-    // ─── Stagger timeline items ───
-    document.querySelectorAll('.timeline-item').forEach((el, i) => {
-      el.style.transitionDelay = (i * 0.08) + 's';
-    });
-
-    document.querySelectorAll('.pub-item').forEach((el, i) => {
-      el.style.transitionDelay = (i * 0.07) + 's';
-    });
+    // ─── Stagger timeline / pub items ───
+    document.querySelectorAll('.timeline-item').forEach((el, i) => { el.style.transitionDelay = (i * 0.08) + 's'; });
+    document.querySelectorAll('.pub-item').forEach((el, i) => { el.style.transitionDelay = (i * 0.07) + 's'; });
 
     // ─── Count publications ───
-    const pubCount = document.querySelectorAll('.pub-item').length;
     const pubCountEl = document.getElementById('pubCount');
-    if (pubCountEl) {
-      pubCountEl.textContent = pubCount;
-    }
+    if (pubCountEl) pubCountEl.textContent = document.querySelectorAll('.pub-item').length;
+
+    // ══════════════════════════════════════════════
+    // CAREER OVERVIEW GANTT — DATA & RENDER
+    // ══════════════════════════════════════════════
+    (function () {
+      const START = new Date(2017, 0, 1);
+      const END = new Date(2026, 8, 1); // Sep 2026 → small right padding
+      const TODAY = new Date();
+      const totalMs = END - START;
+
+      function pct(date) {
+        return Math.max(0, Math.min(100, ((date - START) / totalMs) * 100));
+      }
+      function d(y, m, day = 1) { return new Date(y, m - 1, day); }
+      function fmtDate(dt, isPresent) {
+        if (isPresent) return 'Present';
+        return dt.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }).toUpperCase();
+      }
+
+      const LANES = [
+        {
+          label: 'Mobimentum', bars: [
+            {
+              role: 'Software Developer', company: 'Mobimentum', start: d(2017, 6), end: d(2017, 7, 31), cls: 'eng',
+              tags: ['Java SE 8', 'Spring 4', 'JHipster', 'Angular.js']
+            }
+          ]
+        },
+        {
+          label: 'Toyota MHMI', bars: [
+            {
+              role: 'Software Dev & Analyst', company: 'Toyota Material Handling Mfg Italy SpA', start: d(2017, 8), end: d(2018, 10, 31), cls: 'eng',
+              tags: ['Oracle JD Edwards 9', 'SQL', 'Kanban', 'Toyota Production System']
+            }
+          ]
+        },
+        {
+          label: 'Engineering SpA', bars: [
+            {
+              role: 'Software Engineer', company: 'Engineering Ingegneria Informatica SpA', start: d(2018, 11), end: d(2021, 6, 30), cls: 'eng',
+              tags: ['Java', 'Spring', 'PEPPOL', 'XSLT 2.0', 'SAML2', '10M+ docs/yr']
+            }
+          ]
+        },
+        {
+          label: 'BSc — Marconi', bars: [
+            {
+              role: 'BSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2019, 3), end: d(2022, 3, 31), cls: 'edu',
+              tags: ['Computer Engineering']
+            }
+          ]
+        },
+        {
+          label: 'CINECA', bars: [
+            {
+              role: 'Software Engineer', company: 'CINECA', start: d(2021, 7), end: d(2022, 8, 31), cls: 'eng',
+              tags: ['Java 11', 'Quarkus', 'Vue.js', 'Kubernetes', 'Keycloak']
+            },
+            {
+              role: 'Lead Software Engineer ↑', company: 'CINECA', start: d(2022, 9), end: d(2023, 7, 31), cls: 'eng',
+              tags: ['Java 17', 'Camunda BPM', 'TensorFlow', 'JIRA integration']
+            }
+          ]
+        },
+        {
+          label: 'Isagog', bars: [
+            {
+              role: 'Research Software Engineer', company: 'Isagog', start: d(2022, 4), end: d(2023, 6, 30), cls: 'res',
+              tags: ['Neuro-Symbolic AI', 'OWL', 'SPARQL', 'GPT-3', 'IEEE / HHAI']
+            }
+          ]
+        },
+        {
+          label: 'MSc — Marconi', bars: [
+            {
+              role: 'MSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2023, 8), end: d(2025, 5, 31), cls: 'edu',
+              tags: ['Digital Transformation', 'Data Science']
+            }
+          ]
+        },
+        {
+          label: 'Leithà | Unipol', bars: [
+            {
+              role: 'Software Engineer', company: 'Leithà | Unipol Group', start: d(2023, 7), end: d(2024, 3, 31), cls: 'eng',
+              tags: ['Java 17', 'Spring Boot', 'Kafka', 'MongoDB', 'Kubernetes']
+            },
+            {
+              role: 'AI Engineer ↑', company: 'Leithà | Unipol Group', start: d(2024, 4), end: TODAY, cls: 'res',
+              tags: ['Qwen 3', 'vLLM', 'LoRA', 'GCP', 'AWS', 'RAG', 'PyTorch', '172k docs/day']
+            }
+          ]
+        },
+        {
+          label: 'Lecturer', bars: [
+            {
+              role: 'Adjunct Lecturer', company: 'Università Guglielmo Marconi', start: d(2025, 10), end: d(2025, 11, 30), cls: 'phd',
+              tags: ['Educational Methodologies', '30 CFU Program']
+            }
+          ]
+        },
+        {
+          label: 'PhD — Marconi', bars: [
+            {
+              role: 'PhD Candidate', company: 'Università Guglielmo Marconi', start: d(2025, 11), end: TODAY, cls: 'phd',
+              tags: ['Neuro-Symbolic AI', 'Poincaré Embeddings', 'JENeSyM', 'ACL SRW 2026']
+            }
+          ]
+        }
+      ];
+
+      // ── Build axis ──
+      const axisEl = document.getElementById('coAxisYears');
+      for (let y = 2017; y <= 2027; y++) {
+        const left = pct(new Date(y, 0, 1));
+        if (left < 0 || left > 100) continue;
+        const tick = document.createElement('div');
+        tick.className = 'co-year-tick';
+        tick.style.left = left + '%';
+        const sp = document.createElement('span');
+        sp.textContent = y;
+        tick.appendChild(sp);
+        axisEl.appendChild(tick);
+      }
+
+      // ── Build lanes ──
+      const lanesEl = document.getElementById('coLanes');
+      const tooltip = document.createElement('div');
+      tooltip.className = 'co-tooltip';
+      tooltip.innerHTML = `
+        <div class="co-tt-role"    id="coTtRole"></div>
+        <div class="co-tt-company" id="coTtCompany"></div>
+        <div class="co-tt-period"  id="coTtPeriod"></div>
+        <div class="co-tt-tags"    id="coTtTags"></div>`;
+      document.body.appendChild(tooltip);
+
+      LANES.forEach(lane => {
+        const row = document.createElement('div');
+        row.className = 'co-lane-row';
+
+        const lbl = document.createElement('div');
+        lbl.className = 'co-lane-label';
+        lbl.textContent = lane.label;
+        row.appendChild(lbl);
+
+        const track = document.createElement('div');
+        track.className = 'co-track';
+
+        lane.bars.forEach(b => {
+          const bar = document.createElement('div');
+          bar.className = 'co-bar ' + b.cls;
+          const l = pct(b.start);
+          const w = Math.max(pct(b.end) - l, 0.35);
+          bar.style.left = l + '%';
+          bar.style.width = w + '%';
+
+          const txt = document.createElement('span');
+          txt.className = 'co-bar-text';
+          txt.textContent = b.role;
+          bar.appendChild(txt);
+
+          bar.addEventListener('mouseenter', () => tooltip.classList.add('visible'));
+          bar.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
+          bar.addEventListener('mousemove', e => {
+            document.getElementById('coTtRole').textContent = b.role;
+            document.getElementById('coTtCompany').textContent = b.company;
+            const isPresent = b.end >= TODAY;
+            document.getElementById('coTtPeriod').textContent = fmtDate(b.start) + ' — ' + fmtDate(b.end, isPresent);
+            const tagsEl = document.getElementById('coTtTags');
+            tagsEl.innerHTML = '';
+            b.tags.forEach(t => {
+              const s = document.createElement('span');
+              s.className = 'co-tt-tag';
+              s.textContent = t;
+              tagsEl.appendChild(s);
+            });
+            let tx = e.clientX + 16;
+            if (tx + 310 > window.innerWidth) tx = e.clientX - 316;
+            tooltip.style.left = tx + 'px';
+            tooltip.style.top = (e.clientY - 14) + 'px';
+          });
+
+          track.appendChild(bar);
+        });
+
+        row.appendChild(track);
+        lanesEl.appendChild(row);
+      });
+
+      // ── Today line (overlaid on lanes container) ──
+      const todayPct = pct(TODAY);
+
+      function positionTodayLine() {
+        const lanesRect = lanesEl.getBoundingClientRect();
+        const chartRect = document.getElementById('careerOverview').getBoundingClientRect();
+        // label col width in pixels
+        const firstLabel = lanesEl.querySelector('.co-lane-label');
+        const labelW = firstLabel ? firstLabel.getBoundingClientRect().width : 130;
+        const trackW = lanesRect.width - labelW;
+        const leftPx = labelW + (trackW * todayPct / 100);
+        const pctOfLanes = (leftPx / lanesRect.width) * 100;
+        todayLine.style.left = pctOfLanes + '%';
+        todayLabelEl.style.left = pctOfLanes + '%';
+      }
+
+      const todayLine = document.createElement('div');
+      todayLine.className = 'co-today-line';
+      const todayLabelEl = document.createElement('div');
+      todayLabelEl.className = 'co-today-label';
+      todayLabelEl.textContent = 'Today';
+
+      lanesEl.style.position = 'relative';
+      lanesEl.appendChild(todayLabelEl);
+      lanesEl.appendChild(todayLine);
+
+      positionTodayLine();
+      const ro = new ResizeObserver(positionTodayLine);
+      ro.observe(lanesEl);
+
+    })();
   </script>
 </body>
 
