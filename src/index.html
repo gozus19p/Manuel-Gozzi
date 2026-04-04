@@ -45,7 +45,6 @@
       overflow-x: hidden;
     }
 
-    /* ─── Noise overlay ─── */
     body::before {
       content: '';
       position: fixed;
@@ -56,7 +55,6 @@
       z-index: 9999;
     }
 
-    /* ─── Scrollbar ─── */
     ::-webkit-scrollbar {
       width: 3px;
     }
@@ -69,7 +67,6 @@
       background: var(--accent);
     }
 
-    /* ─── NAV ─── */
     nav {
       position: fixed;
       top: 0;
@@ -118,7 +115,6 @@
       color: var(--accent);
     }
 
-    /* ─── HERO ─── */
     .hero {
       min-height: 100vh;
       display: grid;
@@ -217,21 +213,6 @@
       padding: 2rem 3rem 3rem;
     }
 
-    /* Big decorative number */
-    .hero-number {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 38vw;
-      color: transparent;
-      -webkit-text-stroke: 1px var(--dim);
-      position: absolute;
-      right: -8vw;
-      bottom: -4vw;
-      line-height: 1;
-      pointer-events: none;
-      opacity: 0;
-      animation: fadeIn 1.5s 1s forwards;
-    }
-
     .hero-stats {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -276,7 +257,6 @@
       margin-top: .4rem;
     }
 
-    /* ─── SECTION BASE ─── */
     section {
       padding: 7rem 5rem;
     }
@@ -306,7 +286,6 @@
       margin: 0;
     }
 
-    /* ─── ABOUT ─── */
     .about {
       display: grid;
       grid-template-columns: 1fr 1.6fr;
@@ -358,7 +337,6 @@
       color: var(--accent2);
     }
 
-    /* ─── EXPERIENCE ─── */
     .experience {
       background: var(--bg2);
     }
@@ -405,31 +383,6 @@
       border: 2px solid var(--accent);
       background: var(--bg);
       transform: rotate(45deg);
-    }
-
-    .timeline-period {
-      font-family: 'JetBrains Mono', monospace;
-      font-size: .65rem;
-      letter-spacing: .1em;
-      color: var(--muted);
-      text-transform: uppercase;
-      margin-bottom: .6rem;
-    }
-
-    .timeline-role {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1.9rem;
-      letter-spacing: .05em;
-      color: var(--white);
-      line-height: 1;
-    }
-
-    .timeline-company {
-      font-style: italic;
-      color: var(--accent);
-      font-size: 1.1rem;
-      margin-top: .2rem;
-      margin-bottom: 1rem;
     }
 
     .timeline-desc {
@@ -520,7 +473,6 @@
       line-height: 1.6;
     }
 
-    /* ─── RESEARCH & PUBLICATIONS ─── */
     .research {
       background: var(--bg2);
     }
@@ -621,7 +573,6 @@
       margin-top: .3rem;
     }
 
-    /* ─── EDUCATION ─── */
     .edu-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -674,7 +625,6 @@
       letter-spacing: .08em;
     }
 
-    /* ─── CONTACT ─── */
     .contact {
       background: var(--bg);
       text-align: center;
@@ -736,7 +686,6 @@
       border-color: var(--accent);
     }
 
-    /* ─── FOOTER ─── */
     footer {
       padding: 2rem 5rem;
       border-top: 1px solid var(--border);
@@ -752,7 +701,6 @@
       letter-spacing: .08em;
     }
 
-    /* ─── ANIMATIONS ─── */
     @keyframes fadeUp {
       from {
         opacity: 0;
@@ -775,7 +723,6 @@
       }
     }
 
-    /* Cursor dot */
     .cursor {
       position: fixed;
       width: 8px;
@@ -800,7 +747,6 @@
       transition: transform .18s ease, width .3s, height .3s;
     }
 
-    /* Reveal on scroll base */
     .reveal {
       opacity: 0;
       transform: translateY(30px);
@@ -812,7 +758,6 @@
       transform: none;
     }
 
-    /* ─── GROUPED TIMELINE ─── */
     .tg-header {
       margin-bottom: 1.2rem;
     }
@@ -920,7 +865,6 @@
       vertical-align: middle;
     }
 
-    /* ─── HERO PHOTO ─── */
     .hero-photo-wrap {
       display: flex;
       flex-direction: column;
@@ -968,7 +912,6 @@
       color: var(--muted);
     }
 
-    /* ─── CAREER OVERVIEW CHART ─── */
     .career-overview {
       margin-bottom: 4rem;
       padding: 2.5rem;
@@ -1029,22 +972,6 @@
       flex-shrink: 0;
     }
 
-    /* axis */
-    .co-axis-wrap {
-      display: flex;
-      align-items: flex-start;
-    }
-
-    .co-label-col {
-      width: 130px;
-      flex-shrink: 0;
-    }
-
-    .co-chart-col {
-      flex: 1;
-      position: relative;
-    }
-
     .co-axis-years {
       position: relative;
       height: 26px;
@@ -1077,7 +1004,6 @@
       background: var(--dim);
     }
 
-    /* lanes */
     .co-lanes {
       display: flex;
       flex-direction: column;
@@ -1108,22 +1034,6 @@
       flex: 1;
       height: 100%;
       position: relative;
-    }
-
-    /* grid lines behind bars */
-    .co-grid-lines {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-
-    .co-grid-line {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: var(--dim);
-      opacity: .3;
     }
 
     .co-bar {
@@ -1193,7 +1103,6 @@
       color: var(--muted);
     }
 
-    /* today line */
     .co-today-line {
       position: absolute;
       top: 0;
@@ -1218,7 +1127,6 @@
       z-index: 4;
     }
 
-    /* tooltip */
     .co-tooltip {
       position: fixed;
       background: var(--surface);
@@ -1281,7 +1189,6 @@
       border-radius: 1px;
     }
 
-    /* ─── RESPONSIVE ─── */
     @media (max-width: 900px) {
       nav {
         padding: 1.2rem 1.5rem;
@@ -1346,11 +1253,9 @@
 
 <body>
 
-  <!-- Cursor -->
   <div class="cursor" id="cursor"></div>
   <div class="cursor-ring" id="cursorRing"></div>
 
-  <!-- NAV -->
   <nav id="nav">
     <a class="nav-logo" href="#">M·G</a>
     <ul class="nav-links">
@@ -1362,7 +1267,6 @@
     </ul>
   </nav>
 
-  <!-- HERO -->
   <section class="hero" id="hero">
     <div class="hero-left">
       <p class="hero-eyebrow">AI Engineer · Researcher · PhD Candidate</p>
@@ -1407,7 +1311,6 @@
 
   <div class="divider"></div>
 
-  <!-- ABOUT -->
   <section id="about">
     <div class="about">
       <div class="about-left">
@@ -1459,14 +1362,10 @@
 
   <div class="divider"></div>
 
-  <!-- EXPERIENCE -->
   <section class="experience" id="experience">
     <p class="section-tag">Career</p>
     <h2 class="section-title">Where I've built things.</h2>
 
-    <!-- ══════════════════════════════════════════════
-         CAREER OVERVIEW GANTT CHART
-    ══════════════════════════════════════════════ -->
     <div class="career-overview reveal" id="careerOverview">
       <div class="co-header">
         <span class="co-title">Career at a glance · 2017 — present</span>
@@ -1486,7 +1385,6 @@
         </div>
       </div>
 
-      <!-- axis label spacer row -->
       <div style="display:flex;">
         <div style="width:130px;flex-shrink:0;"></div>
         <div style="flex:1;position:relative;">
@@ -1494,14 +1392,11 @@
         </div>
       </div>
 
-      <!-- lanes (label + track pairs, built by JS) -->
       <div class="co-lanes" id="coLanes"></div>
     </div>
-    <!-- ── end career overview ── -->
 
     <div class="timeline">
 
-      <!-- ── Leithà | Unipol Group ── -->
       <div class="timeline-group timeline-item">
         <div class="timeline-dot"></div>
         <div class="tg-header">
@@ -1520,9 +1415,15 @@
               Precision and 96.4% F1-Score on complex insurance documents. Optimized for high-throughput production with
               vLLM — 172k+ documents processed daily through a cascaded classification and extraction
               architecture.<br><br>
-              Developed a CPU-based binary classifier (100ms latency) whose output aligns with Gemini 2.5 Pro on 82% of
-              classifications. Built RAG systems, Text-to-SQL engines, and document intelligence platforms deployed on
-              GCP and AWS.
+              Developed a CPU-based binary classifier (100ms latency) achieving <strong>94% Precision on real production
+                data</strong> — reliable enough to authorise insurance policy emissions fully automatically, with no
+              human-in-the-loop. Its decisions also align with Gemini 2.5 Pro on 82% of classifications, at a fraction
+              of the inference cost.<br><br>
+              Led the development of a multi-agent system for deep insurance policy analysis: agents extract structured
+              data, ground every extracted field to its exact source page(s) in the document, and cross-link related
+              information (e.g. the excess tied to a specific insured location). Achieves a <strong>mean F1 of 94%
+                per document</strong> on 20–30 page policies. Built RAG systems, Text-to-SQL engines, and document
+              intelligence platforms deployed on GCP and AWS.
             </div>
             <div class="timeline-tech">
               <span class="tech-pill">Qwen 3</span>
@@ -1558,7 +1459,6 @@
         </div>
       </div>
 
-      <!-- ── Università Guglielmo Marconi ── -->
       <div class="timeline-group timeline-item">
         <div class="timeline-dot"></div>
         <div class="tg-header">
@@ -1583,7 +1483,6 @@
         </div>
       </div>
 
-      <!-- ── Isagog ── -->
       <div class="timeline-group timeline-item">
         <div class="timeline-dot"></div>
         <div class="tg-header">
@@ -1614,7 +1513,6 @@
         </div>
       </div>
 
-      <!-- ── CINECA ── -->
       <div class="timeline-group timeline-item">
         <div class="timeline-dot"></div>
         <div class="tg-header">
@@ -1665,7 +1563,6 @@
         </div>
       </div>
 
-      <!-- ── Engineering SpA ── -->
       <div class="timeline-group timeline-item">
         <div class="timeline-dot"></div>
         <div class="tg-header">
@@ -1695,7 +1592,6 @@
         </div>
       </div>
 
-      <!-- ── Toyota ── -->
       <div class="timeline-group timeline-item">
         <div class="timeline-dot"></div>
         <div class="tg-header">
@@ -1724,7 +1620,6 @@
         </div>
       </div>
 
-      <!-- ── Mobimentum ── -->
       <div class="timeline-group timeline-item">
         <div class="timeline-dot"></div>
         <div class="tg-header">
@@ -1804,20 +1699,31 @@
           insurance price estimation platform that now generates an annual margin exceeding €20 million for the Unipol
           Group.</div>
       </div>
+      <!-- UPDATED: CPU Classifier card -->
       <div class="achievement-card reveal">
         <span class="achievement-icon">🏎</span>
-        <div class="achievement-metric">100ms</div>
-        <div class="achievement-title">CPU Classifier — Gemini-Level Accuracy</div>
+        <div class="achievement-metric">94%</div>
+        <div class="achievement-title">CPU Classifier — 94% Precision, No Human-in-the-Loop</div>
         <div class="achievement-desc">At <strong>Leithà</strong>, I developed a binary classifier running entirely on
-          CPU with 100ms latency whose decisions align with Gemini 2.5 Pro on 82% of cases — at a fraction of the
-          inference cost.</div>
+          CPU with 100ms latency that achieves <strong>94% Precision on real production data</strong> — precise enough
+          to authorise insurance policy emissions fully automatically, with no human review required. Its decisions also
+          align with Gemini 2.5 Pro on 82% of cases, at a fraction of the inference cost.</div>
+      </div>
+      <!-- NEW: Multi-agent system card -->
+      <div class="achievement-card reveal">
+        <span class="achievement-icon">🕸️</span>
+        <div class="achievement-metric">94%</div>
+        <div class="achievement-title">Multi-Agent Policy Analysis — 94% Mean F1</div>
+        <div class="achievement-desc">At <strong>Leithà</strong>, I led the development of a multi-agent system for
+          deep insurance policy analysis. It extracts structured data, grounds every field to its exact source page(s)
+          in the document, and cross-links related information (e.g. the excess tied to a specific insured location).
+          Achieves a <strong>mean F1 of 94% per document</strong> across 20–30 page insurance policies.</div>
       </div>
     </div>
   </section>
 
   <div class="divider"></div>
 
-  <!-- RESEARCH -->
   <section class="research" id="research">
     <p class="section-tag">Academia</p>
     <h2 class="section-title">Research & Publications.</h2>
@@ -1921,7 +1827,6 @@
 
   <div class="divider"></div>
 
-  <!-- EDUCATION -->
   <section id="education">
     <p class="section-tag reveal">Formation</p>
     <h2 class="section-title reveal">Education.</h2>
@@ -1953,7 +1858,6 @@
 
   <div class="divider"></div>
 
-  <!-- CONTACT -->
   <section class="contact" id="contact">
     <div class="contact-bg-text">HELLO</div>
     <div class="contact-inner">
@@ -1977,7 +1881,6 @@
     </div>
   </section>
 
-  <!-- FOOTER -->
   <footer>
     <span>© 2026 Manuel Gozzi — San Giorgio di Piano, Emilia-Romagna</span>
     <span>Built with precision · Driven by curiosity</span>
@@ -1985,7 +1888,6 @@
 
   <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script>
   <script>
-    // ─── Calculate years of experience ───
     function calculateYearsOfExperience() {
       const startDate = new Date('2017-06-01');
       const today = new Date();
@@ -2004,7 +1906,6 @@
       yearsInTextEl.textContent = yearsExp <= 15 ? words[yearsExp] : yearsExp;
     }
 
-    // ─── Custom cursor ───
     const cursor = document.getElementById('cursor');
     const ring = document.getElementById('cursorRing');
     let mx = 0, my = 0, rx = 0, ry = 0;
@@ -2025,40 +1926,31 @@
       el.addEventListener('mouseleave', () => { cursor.style.width = '8px'; cursor.style.height = '8px'; ring.style.width = '32px'; ring.style.height = '32px'; });
     });
 
-    // ─── Nav scroll ───
     window.addEventListener('scroll', () => {
       document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 60);
     });
 
-    // ─── Scroll reveal ───
     const observer = new IntersectionObserver(entries => {
       entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
     }, { threshold: 0.12 });
     document.querySelectorAll('.reveal, .timeline-item, .pub-item').forEach(el => observer.observe(el));
 
-    // ─── Stagger timeline / pub items ───
     document.querySelectorAll('.timeline-item').forEach((el, i) => { el.style.transitionDelay = (i * 0.08) + 's'; });
     document.querySelectorAll('.pub-item').forEach((el, i) => { el.style.transitionDelay = (i * 0.07) + 's'; });
 
-    // ─── Count publications ───
     const pubCountEl = document.getElementById('pubCount');
     const publicationsInHeroEl = document.getElementById('publicationsInHero');
     const publicationsCount = document.querySelectorAll('.pub-item').length;
     if (pubCountEl) pubCountEl.textContent = publicationsCount;
     if (publicationsInHeroEl) publicationsInHeroEl.textContent = publicationsCount;
 
-    // ══════════════════════════════════════════════
-    // CAREER OVERVIEW GANTT — DATA & RENDER
-    // ══════════════════════════════════════════════
     (function () {
       const START = new Date(2017, 0, 1);
-      const END = new Date(2026, 8, 1); // Sep 2026 → small right padding
+      const END = new Date(2026, 8, 1);
       const TODAY = new Date();
       const totalMs = END - START;
 
-      function pct(date) {
-        return Math.max(0, Math.min(100, ((date - START) / totalMs) * 100));
-      }
+      function pct(date) { return Math.max(0, Math.min(100, ((date - START) / totalMs) * 100)); }
       function d(y, m, day = 1) { return new Date(y, m - 1, day); }
       function fmtDate(dt, isPresent) {
         if (isPresent) return 'Present';
@@ -2066,97 +1958,28 @@
       }
 
       const LANES = [
-        {
-          label: 'Mobimentum', bars: [
-            {
-              role: 'Software Developer', company: 'Mobimentum', start: d(2017, 6), end: d(2017, 7, 31), cls: 'eng',
-              tags: ['Java SE 8', 'Spring 4', 'JHipster', 'Angular.js']
-            }
-          ]
-        },
-        {
-          label: 'Toyota MHMI', bars: [
-            {
-              role: 'Software Dev & Analyst', company: 'Toyota Material Handling Mfg Italy SpA', start: d(2017, 8), end: d(2018, 10, 31), cls: 'eng',
-              tags: ['Oracle JD Edwards 9', 'SQL', 'Kanban', 'Toyota Production System']
-            }
-          ]
-        },
-        {
-          label: 'Engineering SpA', bars: [
-            {
-              role: 'Software Engineer', company: 'Engineering Ingegneria Informatica SpA', start: d(2018, 11), end: d(2021, 6, 30), cls: 'eng',
-              tags: ['Java', 'Spring', 'PEPPOL', 'XSLT 2.0', 'SAML2', '10M+ docs/yr']
-            }
-          ]
-        },
-        {
-          label: 'BSc — Marconi', bars: [
-            {
-              role: 'BSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2019, 3), end: d(2022, 3, 31), cls: 'edu',
-              tags: ['Computer Engineering']
-            }
-          ]
-        },
+        { label: 'Mobimentum', bars: [{ role: 'Software Developer', company: 'Mobimentum', start: d(2017, 6), end: d(2017, 7, 31), cls: 'eng', tags: ['Java SE 8', 'Spring 4', 'JHipster', 'Angular.js'] }] },
+        { label: 'Toyota MHMI', bars: [{ role: 'Software Dev & Analyst', company: 'Toyota Material Handling Mfg Italy SpA', start: d(2017, 8), end: d(2018, 10, 31), cls: 'eng', tags: ['Oracle JD Edwards 9', 'SQL', 'Kanban', 'Toyota Production System'] }] },
+        { label: 'Engineering SpA', bars: [{ role: 'Software Engineer', company: 'Engineering Ingegneria Informatica SpA', start: d(2018, 11), end: d(2021, 6, 30), cls: 'eng', tags: ['Java', 'Spring', 'PEPPOL', 'XSLT 2.0', 'SAML2', '10M+ docs/yr'] }] },
+        { label: 'BSc — Marconi', bars: [{ role: 'BSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2019, 3), end: d(2022, 3, 31), cls: 'edu', tags: ['Computer Engineering'] }] },
         {
           label: 'CINECA', bars: [
-            {
-              role: 'Software Engineer', company: 'CINECA', start: d(2021, 7), end: d(2022, 8, 31), cls: 'eng',
-              tags: ['Java 11', 'Quarkus', 'Vue.js', 'Kubernetes', 'Keycloak']
-            },
-            {
-              role: 'Lead Software Engineer ↑', company: 'CINECA', start: d(2022, 9), end: d(2023, 7, 31), cls: 'eng',
-              tags: ['Java 17', 'Camunda BPM', 'TensorFlow', 'JIRA integration']
-            }
+            { role: 'Software Engineer', company: 'CINECA', start: d(2021, 7), end: d(2022, 8, 31), cls: 'eng', tags: ['Java 11', 'Quarkus', 'Vue.js', 'Kubernetes', 'Keycloak'] },
+            { role: 'Lead Software Engineer ↑', company: 'CINECA', start: d(2022, 9), end: d(2023, 7, 31), cls: 'eng', tags: ['Java 17', 'Camunda BPM', 'TensorFlow', 'JIRA integration'] }
           ]
         },
-        {
-          label: 'Isagog', bars: [
-            {
-              role: 'Research Software Engineer', company: 'Isagog', start: d(2022, 4), end: d(2023, 6, 30), cls: 'res',
-              tags: ['Neuro-Symbolic AI', 'OWL', 'SPARQL', 'GPT-3', 'IEEE / HHAI']
-            }
-          ]
-        },
-        {
-          label: 'MSc — Marconi', bars: [
-            {
-              role: 'MSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2023, 8), end: d(2025, 5, 31), cls: 'edu',
-              tags: ['Digital Transformation', 'Data Science']
-            }
-          ]
-        },
+        { label: 'Isagog', bars: [{ role: 'Research Software Engineer', company: 'Isagog', start: d(2022, 4), end: d(2023, 6, 30), cls: 'res', tags: ['Neuro-Symbolic AI', 'OWL', 'SPARQL', 'GPT-3', 'IEEE / HHAI'] }] },
+        { label: 'MSc — Marconi', bars: [{ role: 'MSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2023, 8), end: d(2025, 5, 31), cls: 'edu', tags: ['Digital Transformation', 'Data Science'] }] },
         {
           label: 'Leithà | Unipol', bars: [
-            {
-              role: 'Software Engineer', company: 'Leithà | Unipol Group', start: d(2023, 7), end: d(2024, 3, 31), cls: 'eng',
-              tags: ['Java 17', 'Spring Boot', 'Kafka', 'MongoDB', 'Kubernetes']
-            },
-            {
-              role: 'AI Engineer ↑', company: 'Leithà | Unipol Group', start: d(2024, 4), end: TODAY, cls: 'res',
-              tags: ['Qwen 3', 'vLLM', 'LoRA', 'GCP', 'AWS', 'RAG', 'PyTorch', '172k docs/day']
-            }
+            { role: 'Software Engineer', company: 'Leithà | Unipol Group', start: d(2023, 7), end: d(2024, 3, 31), cls: 'eng', tags: ['Java 17', 'Spring Boot', 'Kafka', 'MongoDB', 'Kubernetes'] },
+            { role: 'AI Engineer ↑', company: 'Leithà | Unipol Group', start: d(2024, 4), end: TODAY, cls: 'res', tags: ['Qwen 3', 'vLLM', 'LoRA', 'GCP', 'AWS', 'RAG', 'PyTorch', '172k docs/day'] }
           ]
         },
-        {
-          label: 'Lecturer', bars: [
-            {
-              role: 'Adjunct Lecturer', company: 'Università Guglielmo Marconi', start: d(2025, 10), end: d(2025, 11, 30), cls: 'phd',
-              tags: ['Educational Methodologies', '30 CFU Program']
-            }
-          ]
-        },
-        {
-          label: 'PhD — Marconi', bars: [
-            {
-              role: 'PhD Candidate', company: 'Università Guglielmo Marconi', start: d(2025, 11), end: TODAY, cls: 'phd',
-              tags: ['Neuro-Symbolic AI', 'Poincaré Embeddings', 'JENeSyM', 'ACL SRW 2026']
-            }
-          ]
-        }
+        { label: 'Lecturer', bars: [{ role: 'Adjunct Lecturer', company: 'Università Guglielmo Marconi', start: d(2025, 10), end: d(2025, 11, 30), cls: 'phd', tags: ['Educational Methodologies', '30 CFU Program'] }] },
+        { label: 'PhD — Marconi', bars: [{ role: 'PhD Candidate', company: 'Università Guglielmo Marconi', start: d(2025, 11), end: TODAY, cls: 'phd', tags: ['Neuro-Symbolic AI', 'Poincaré Embeddings', 'JENeSyM', 'ACL SRW 2026'] }] }
       ];
 
-      // ── Build axis ──
       const axisEl = document.getElementById('coAxisYears');
       for (let y = 2017; y <= 2027; y++) {
         const left = pct(new Date(y, 0, 1));
@@ -2170,26 +1993,19 @@
         axisEl.appendChild(tick);
       }
 
-      // ── Build lanes ──
       const lanesEl = document.getElementById('coLanes');
       const tooltip = document.createElement('div');
       tooltip.className = 'co-tooltip';
-      tooltip.innerHTML = `
-        <div class="co-tt-role"    id="coTtRole"></div>
-        <div class="co-tt-company" id="coTtCompany"></div>
-        <div class="co-tt-period"  id="coTtPeriod"></div>
-        <div class="co-tt-tags"    id="coTtTags"></div>`;
+      tooltip.innerHTML = `<div class="co-tt-role" id="coTtRole"></div><div class="co-tt-company" id="coTtCompany"></div><div class="co-tt-period" id="coTtPeriod"></div><div class="co-tt-tags" id="coTtTags"></div>`;
       document.body.appendChild(tooltip);
 
       LANES.forEach(lane => {
         const row = document.createElement('div');
         row.className = 'co-lane-row';
-
         const lbl = document.createElement('div');
         lbl.className = 'co-lane-label';
         lbl.textContent = lane.label;
         row.appendChild(lbl);
-
         const track = document.createElement('div');
         track.className = 'co-track';
 
@@ -2200,7 +2016,6 @@
           const w = Math.max(pct(b.end) - l, 0.35);
           bar.style.left = l + '%';
           bar.style.width = w + '%';
-
           const txt = document.createElement('span');
           txt.className = 'co-bar-text';
           txt.textContent = b.role;
@@ -2215,18 +2030,12 @@
             document.getElementById('coTtPeriod').textContent = fmtDate(b.start) + ' — ' + fmtDate(b.end, isPresent);
             const tagsEl = document.getElementById('coTtTags');
             tagsEl.innerHTML = '';
-            b.tags.forEach(t => {
-              const s = document.createElement('span');
-              s.className = 'co-tt-tag';
-              s.textContent = t;
-              tagsEl.appendChild(s);
-            });
+            b.tags.forEach(t => { const s = document.createElement('span'); s.className = 'co-tt-tag'; s.textContent = t; tagsEl.appendChild(s); });
             let tx = e.clientX + 16;
             if (tx + 310 > window.innerWidth) tx = e.clientX - 316;
             tooltip.style.left = tx + 'px';
             tooltip.style.top = (e.clientY - 14) + 'px';
           });
-
           track.appendChild(bar);
         });
 
@@ -2234,13 +2043,10 @@
         lanesEl.appendChild(row);
       });
 
-      // ── Today line (overlaid on lanes container) ──
       const todayPct = pct(TODAY);
 
       function positionTodayLine() {
         const lanesRect = lanesEl.getBoundingClientRect();
-        const chartRect = document.getElementById('careerOverview').getBoundingClientRect();
-        // label col width in pixels
         const firstLabel = lanesEl.querySelector('.co-lane-label');
         const labelW = firstLabel ? firstLabel.getBoundingClientRect().width : 130;
         const trackW = lanesRect.width - labelW;
@@ -2255,15 +2061,12 @@
       const todayLabelEl = document.createElement('div');
       todayLabelEl.className = 'co-today-label';
       todayLabelEl.textContent = 'Today';
-
       lanesEl.style.position = 'relative';
       lanesEl.appendChild(todayLabelEl);
       lanesEl.appendChild(todayLine);
-
       positionTodayLine();
       const ro = new ResizeObserver(positionTodayLine);
       ro.observe(lanesEl);
-
     })();
   </script>
 </body>
