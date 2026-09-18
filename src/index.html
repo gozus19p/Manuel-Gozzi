@@ -1988,7 +1988,17 @@
         proceedings across Q1/Q2 journals and top-tier venues in AI, NLP, and Software Engineering.</div>
     </div>
     <div class="pub-list">
-      <div class="pub-item"><span class="pub-index">07</span>
+      <div class="pub-item"><span class="pub-index">08</span>
+        <div>
+          <div class="pub-title">Do LLMs Know Basic Italian? Evaluating Lexical Competence through Dictionary Entry
+            Generation against the De Mauro Basic Vocabulary</div>
+          <div class="pub-venue">CLiC-it 2026: Twelfth Italian Conference on Computational Linguistics</div><span
+            class="pub-date">16th September 2026</span><a class="tg-link"
+            href="https://clic2026.unipa.it/wp-content/uploads/2026/09/55_main_long.pdf" target="_blank">Pre-Proceedings
+            ↗</a>
+        </div><span class="pub-badge conf">Conference</span>
+      </div>
+      <div class="pub-item"><span class="pub-index">08</span>
         <div>
           <div class="pub-title">Emotional Framing in Prompts Modulates Large Language Model Performance</div>
           <div class="pub-venue">MDPI - Big Data and Cognitive Computing</div><span class="pub-date">24th March
@@ -2124,27 +2134,27 @@
     (function () {
       const canvas = document.getElementById('neuralCanvas');
       const ctx = canvas.getContext('2d');
-      let W, H, particles, mouse = {x: -9999, y: -9999};
+      let W, H, particles, mouse = { x: -9999, y: -9999 };
       const COUNT = 70;
       function resize() {
         W = canvas.width = canvas.offsetWidth;
         H = canvas.height = canvas.offsetHeight;
       }
       function init() {
-        particles = Array.from({length: COUNT}, () => ({
+        particles = Array.from({ length: COUNT }, () => ({
           x: Math.random() * W, y: Math.random() * H,
           vx: (Math.random() - .5) * .25, vy: (Math.random() - .5) * .25,
           r: Math.random() * 1.6 + .6
         }));
       }
       resize(); init();
-      window.addEventListener('resize', () => {resize(); init();});
+      window.addEventListener('resize', () => { resize(); init(); });
       const hero = document.getElementById('hero');
       hero.addEventListener('mousemove', e => {
         const r = canvas.getBoundingClientRect();
         mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
       });
-      hero.addEventListener('mouseleave', () => {mouse.x = -9999; mouse.y = -9999;});
+      hero.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
 
       function tick() {
         ctx.clearRect(0, 0, W, H);
@@ -2155,7 +2165,7 @@
           // gentle mouse attraction
           const dx = mouse.x - p.x, dy = mouse.y - p.y;
           const dist = Math.hypot(dx, dy);
-          if (dist < 160 && dist > 0.01) {p.x += dx / dist * .3; p.y += dy / dist * .3;}
+          if (dist < 160 && dist > 0.01) { p.x += dx / dist * .3; p.y += dy / dist * .3; }
           ctx.beginPath();
           ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
           ctx.fillStyle = 'rgba(200,169,110,.7)';
@@ -2192,7 +2202,7 @@
     /* ═══════════════ SCRAMBLE TEXT ═══════════════ */
     const GLYPHS = 'アイウエオ01<>{}[]=+*#$/\\';
     function scramble(el, finalText, duration = 900) {
-      if (reducedMotion) {el.textContent = finalText; return;}
+      if (reducedMotion) { el.textContent = finalText; return; }
       const len = finalText.length;
       const start = performance.now();
       function frame(now) {
@@ -2219,7 +2229,7 @@
           scramble(e.target, e.target.dataset.text || e.target.textContent, 800);
         }
       });
-    }, {threshold: .4});
+    }, { threshold: .4 });
     document.querySelectorAll('.section-title').forEach(el => {
       el.dataset.text = el.textContent;
       scrambleObserver.observe(el);
@@ -2229,7 +2239,7 @@
     function animateCount(el) {
       const target = parseInt(el.dataset.count, 10);
       const suffix = el.dataset.suffix || '';
-      if (reducedMotion) {el.textContent = target + suffix; return;}
+      if (reducedMotion) { el.textContent = target + suffix; return; }
       const start = performance.now(), dur = 1400;
       function frame(now) {
         const t = Math.min(1, (now - start) / dur);
@@ -2249,7 +2259,7 @@
           obs.disconnect();
         }
       });
-    }, {threshold: .3}).observe(statsWrap);
+    }, { threshold: .3 }).observe(statsWrap);
 
     /* ═══════════════ WORD ROTATOR ═══════════════ */
     (function () {
@@ -2259,7 +2269,7 @@
       setInterval(() => {
         i = (i + 1) % words.length;
         el.classList.add('swap');
-        setTimeout(() => {el.textContent = words[i]; el.classList.remove('swap');}, 320);
+        setTimeout(() => { el.textContent = words[i]; el.classList.remove('swap'); }, 320);
       }, 3200);
     })();
 
@@ -2280,7 +2290,7 @@
           const y = (e.clientY - r.top - r.height / 2) * .35;
           btn.style.transform = `translate(${x}px, ${y}px)`;
         });
-        btn.addEventListener('mouseleave', () => {btn.style.transform = ''; btn.style.transition = 'transform .4s ease'; setTimeout(() => btn.style.transition = '', 400);});
+        btn.addEventListener('mouseleave', () => { btn.style.transform = ''; btn.style.transition = 'transform .4s ease'; setTimeout(() => btn.style.transition = '', 400); });
       });
     }
 
@@ -2308,11 +2318,11 @@
       const h = document.documentElement;
       const p = h.scrollTop / (h.scrollHeight - h.clientHeight) * 100;
       document.getElementById('scrollProgress').style.width = p + '%';
-    }, {passive: true});
+    }, { passive: true });
 
     const observer = new IntersectionObserver(entries => {
-      entries.forEach(e => {if (e.isIntersecting) e.target.classList.add('visible');});
-    }, {threshold: 0.12});
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.12 });
     document.querySelectorAll('.reveal, .timeline-item, .pub-item').forEach(el => observer.observe(el));
     document.querySelectorAll('.timeline-item').forEach((el, i) => el.style.transitionDelay = (i * .08) + 's');
     document.querySelectorAll('.pub-item').forEach((el, i) => el.style.transitionDelay = (i * .07) + 's');
@@ -2331,8 +2341,8 @@
         requestAnimationFrame(animRing);
       })();
       document.querySelectorAll('a, button, .achievement-card').forEach(el => {
-        el.addEventListener('mouseenter', () => {cursor.style.width = '14px'; cursor.style.height = '14px'; ring.style.width = '48px'; ring.style.height = '48px';});
-        el.addEventListener('mouseleave', () => {cursor.style.width = '8px'; cursor.style.height = '8px'; ring.style.width = '32px'; ring.style.height = '32px';});
+        el.addEventListener('mouseenter', () => { cursor.style.width = '14px'; cursor.style.height = '14px'; ring.style.width = '48px'; ring.style.height = '48px'; });
+        el.addEventListener('mouseleave', () => { cursor.style.width = '8px'; cursor.style.height = '8px'; ring.style.width = '32px'; ring.style.height = '32px'; });
       });
     } else {
       document.getElementById('cursor').style.display = 'none';
@@ -2345,29 +2355,29 @@
       const totalMs = END - START;
       const pct = date => Math.max(0, Math.min(100, ((date - START) / totalMs) * 100));
       const d = (y, m, day = 1) => new Date(y, m - 1, day);
-      const fmtDate = (dt, isPresent) => isPresent ? 'Present' : dt.toLocaleDateString('en-GB', {month: 'short', year: 'numeric'}).toUpperCase();
+      const fmtDate = (dt, isPresent) => isPresent ? 'Present' : dt.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }).toUpperCase();
 
       const LANES = [
-        {label: 'Mobimentum', bars: [{role: 'Software Developer', company: 'Mobimentum', start: d(2017, 6), end: d(2017, 7, 31), cls: 'eng', tags: ['Java SE 8', 'Spring 4', 'JHipster']}]},
-        {label: 'Toyota MHMI', bars: [{role: 'Software Dev & Analyst', company: 'Toyota Material Handling Mfg Italy SpA', start: d(2017, 8), end: d(2018, 10, 31), cls: 'eng', tags: ['Oracle JD Edwards 9', 'SQL', 'Kanban']}]},
-        {label: 'Engineering SpA', bars: [{role: 'Software Engineer', company: 'Engineering Ingegneria Informatica SpA', start: d(2018, 11), end: d(2021, 6, 30), cls: 'eng', tags: ['Java', 'PEPPOL', 'XSLT 2.0', '10M+ docs/yr']}]},
-        {label: 'BSc — Marconi', bars: [{role: 'BSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2019, 3), end: d(2022, 3, 31), cls: 'edu', tags: ['Computer Engineering']}]},
+        { label: 'Mobimentum', bars: [{ role: 'Software Developer', company: 'Mobimentum', start: d(2017, 6), end: d(2017, 7, 31), cls: 'eng', tags: ['Java SE 8', 'Spring 4', 'JHipster'] }] },
+        { label: 'Toyota MHMI', bars: [{ role: 'Software Dev & Analyst', company: 'Toyota Material Handling Mfg Italy SpA', start: d(2017, 8), end: d(2018, 10, 31), cls: 'eng', tags: ['Oracle JD Edwards 9', 'SQL', 'Kanban'] }] },
+        { label: 'Engineering SpA', bars: [{ role: 'Software Engineer', company: 'Engineering Ingegneria Informatica SpA', start: d(2018, 11), end: d(2021, 6, 30), cls: 'eng', tags: ['Java', 'PEPPOL', 'XSLT 2.0', '10M+ docs/yr'] }] },
+        { label: 'BSc — Marconi', bars: [{ role: 'BSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2019, 3), end: d(2022, 3, 31), cls: 'edu', tags: ['Computer Engineering'] }] },
         {
           label: 'CINECA', bars: [
-            {role: 'Software Engineer', company: 'CINECA', start: d(2021, 7), end: d(2022, 8, 31), cls: 'eng', tags: ['Java 11', 'Quarkus', 'Kubernetes']},
-            {role: 'Lead Software Engineer ↑', company: 'CINECA', start: d(2022, 9), end: d(2023, 7, 31), cls: 'eng', tags: ['Java 17', 'Camunda BPM', 'TensorFlow']}
+            { role: 'Software Engineer', company: 'CINECA', start: d(2021, 7), end: d(2022, 8, 31), cls: 'eng', tags: ['Java 11', 'Quarkus', 'Kubernetes'] },
+            { role: 'Lead Software Engineer ↑', company: 'CINECA', start: d(2022, 9), end: d(2023, 7, 31), cls: 'eng', tags: ['Java 17', 'Camunda BPM', 'TensorFlow'] }
           ]
         },
-        {label: 'Isagog', bars: [{role: 'Research Software Engineer', company: 'Isagog', start: d(2022, 4), end: d(2023, 6, 30), cls: 'res', tags: ['Neuro-Symbolic AI', 'OWL', 'SPARQL', 'IEEE / HHAI']}]},
-        {label: 'MSc — Marconi', bars: [{role: 'MSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2023, 8), end: d(2025, 5, 31), cls: 'edu', tags: ['Digital Transformation', 'Data Science']}]},
+        { label: 'Isagog', bars: [{ role: 'Research Software Engineer', company: 'Isagog', start: d(2022, 4), end: d(2023, 6, 30), cls: 'res', tags: ['Neuro-Symbolic AI', 'OWL', 'SPARQL', 'IEEE / HHAI'] }] },
+        { label: 'MSc — Marconi', bars: [{ role: 'MSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2023, 8), end: d(2025, 5, 31), cls: 'edu', tags: ['Digital Transformation', 'Data Science'] }] },
         {
           label: 'Leithà | Unipol', bars: [
-            {role: 'Software Engineer', company: 'Leithà | Unipol Group', start: d(2023, 7), end: d(2024, 3, 31), cls: 'eng', tags: ['Java 17', 'Kafka', 'MongoDB']},
-            {role: 'AI Engineer ↑', company: 'Leithà | Unipol Group', start: d(2024, 4), end: TODAY, cls: 'res', tags: ['Qwen 3', 'vLLM', 'LoRA', 'RAG', '172k docs/day']}
+            { role: 'Software Engineer', company: 'Leithà | Unipol Group', start: d(2023, 7), end: d(2024, 3, 31), cls: 'eng', tags: ['Java 17', 'Kafka', 'MongoDB'] },
+            { role: 'AI Engineer ↑', company: 'Leithà | Unipol Group', start: d(2024, 4), end: TODAY, cls: 'res', tags: ['Qwen 3', 'vLLM', 'LoRA', 'RAG', '172k docs/day'] }
           ]
         },
-        {label: 'Lecturer', bars: [{role: 'Adjunct Lecturer', company: 'Università Guglielmo Marconi', start: d(2025, 10), end: d(2025, 11, 30), cls: 'phd', tags: ['30 CFU Program']}]},
-        {label: 'PhD — Marconi', bars: [{role: 'PhD Candidate', company: 'Università Guglielmo Marconi', start: d(2025, 11), end: TODAY, cls: 'phd', tags: ['Neuro-Symbolic AI', 'JENeSyM', 'Poincaré']}]}
+        { label: 'Lecturer', bars: [{ role: 'Adjunct Lecturer', company: 'Università Guglielmo Marconi', start: d(2025, 10), end: d(2025, 11, 30), cls: 'phd', tags: ['30 CFU Program'] }] },
+        { label: 'PhD — Marconi', bars: [{ role: 'PhD Candidate', company: 'Università Guglielmo Marconi', start: d(2025, 11), end: TODAY, cls: 'phd', tags: ['Neuro-Symbolic AI', 'JENeSyM', 'Poincaré'] }] }
       ];
 
       const axisEl = document.getElementById('coAxisYears');
@@ -2405,13 +2415,13 @@
             document.getElementById('coTtCompany').textContent = b.company;
             document.getElementById('coTtPeriod').textContent = fmtDate(b.start) + ' — ' + fmtDate(b.end, b.end >= TODAY);
             const tagsEl = document.getElementById('coTtTags'); tagsEl.innerHTML = '';
-            b.tags.forEach(t => {const s = document.createElement('span'); s.className = 'co-tt-tag'; s.textContent = t; tagsEl.appendChild(s);});
+            b.tags.forEach(t => { const s = document.createElement('span'); s.className = 'co-tt-tag'; s.textContent = t; tagsEl.appendChild(s); });
             let tx = e.clientX + 16;
             if (tx + 310 > window.innerWidth) tx = e.clientX - 316;
             tooltip.style.left = tx + 'px'; tooltip.style.top = (e.clientY - 14) + 'px';
           });
           track.appendChild(bar);
-          bars.push({bar, w});
+          bars.push({ bar, w });
         });
         row.appendChild(track); lanesEl.appendChild(row);
       });
@@ -2424,7 +2434,7 @@
             obs.disconnect();
           }
         });
-      }, {threshold: .2}).observe(lanesEl);
+      }, { threshold: .2 }).observe(lanesEl);
 
       const todayPct = pct(TODAY);
       const todayLine = document.createElement('div'); todayLine.className = 'co-today-line';
