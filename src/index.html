@@ -5,7 +5,31 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Manuel Gozzi — AI Engineer & Researcher</title>
+  <meta name="description"
+    content="Manuel Gozzi — AI Engineer at Leithà (Unipol Group) and PhD candidate. Production LLM pipelines, neuro-symbolic AI research, and peer-reviewed publications on NLP and prompt engineering.">
+  <link rel="canonical" href="https://manuel-gozzi.onrender.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Manuel Gozzi">
+  <meta property="og:title" content="Manuel Gozzi — AI Engineer &amp; Researcher">
+  <meta property="og:description"
+    content="AI Engineer &amp; Researcher — production LLM pipelines, neuro-symbolic AI, and peer-reviewed publications on NLP and prompt engineering.">
+  <meta property="og:url" content="https://manuel-gozzi.onrender.com/">
+  <meta property="og:image"
+    content="https://raw.githubusercontent.com/gozus19p/Manuel-Gozzi/refs/heads/main/src/photo.png">
+  <meta property="og:image:width" content="640">
+  <meta property="og:image:height" content="640">
+  <meta property="og:image:alt" content="Portrait of Manuel Gozzi">
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Manuel Gozzi — AI Engineer &amp; Researcher">
+  <meta name="twitter:description"
+    content="AI Engineer &amp; Researcher — production LLM pipelines, neuro-symbolic AI, and peer-reviewed publications on NLP and prompt engineering.">
+  <meta name="twitter:image"
+    content="https://raw.githubusercontent.com/gozus19p/Manuel-Gozzi/refs/heads/main/src/photo.png">
+  <meta name="theme-color" content="#0a0a08">
+  <link rel="icon"
+    href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' fill='%230a0a08'/%3E%3Ctext x='32' y='44' font-family='Georgia,serif' font-size='34' fill='%23c8a96e' text-anchor='middle'%3EM%C2%B7G%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=JetBrains+Mono:wght@300;400;500&family=Bebas+Neue&display=swap"
     rel="stylesheet">
@@ -19,8 +43,8 @@
       --accent2: #7ec8a9;
       --accent3: #a97ec8;
       --text: #e8e6df;
-      --muted: #6b6960;
-      --dim: #3a3a35;
+      --muted: #918d84;
+      --dim: #4d4b44;
       --white: #f5f3ee;
     }
 
@@ -65,6 +89,51 @@
 
     ::-webkit-scrollbar-thumb {
       background: var(--accent);
+    }
+
+    /* ── MOBILE NAV TOGGLE ── */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      justify-content: center;
+      gap: 5px;
+      padding: .7rem .8rem;
+      background: none;
+      border: 1px solid var(--border);
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+      transition: transform .3s, opacity .3s;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(1) {
+      transform: translateY(6px) rotate(45deg);
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .nav-toggle[aria-expanded="true"] span:nth-child(3) {
+      transform: translateY(-6px) rotate(-45deg);
+    }
+
+    a:focus-visible,
+    button:focus-visible,
+    [tabindex]:focus-visible {
+      outline: 1px solid var(--accent2);
+      outline-offset: 3px;
+    }
+
+    .co-bar:focus-visible {
+      outline: 1px solid var(--accent);
+      outline-offset: 2px;
+      filter: brightness(1.35);
     }
 
     /* ── SCROLL PROGRESS ── */
@@ -1421,9 +1490,37 @@
         padding: 1.2rem 1.5rem;
       }
 
-      .nav-links {
-        display: none;
+      .nav-toggle {
+        display: flex;
       }
+
+      .nav-links {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 1.1rem;
+        padding: 1.5rem 2rem;
+        background: rgba(10, 10, 8, .97);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--border);
+        opacity: 0;
+        transform: translateY(-8px);
+        pointer-events: none;
+        transition: opacity .25s, transform .25s;
+      }
+
+      .nav-links.open {
+        opacity: 1;
+        transform: none;
+        pointer-events: auto;
+      }
+
+      .nav-links a {
+        font-size: .8rem;
+      }
+
 
       .hero {
         grid-template-columns: 1fr;
@@ -1431,13 +1528,27 @@
         padding-top: 6rem;
       }
 
-      .hero-right {
-        display: none;
+      .hero-left {
+        padding: 4rem 2rem 2rem;
       }
 
-      .hero-left {
-        padding: 4rem 2rem;
+      .hero-right {
+        padding: 0 2rem 4rem;
       }
+
+      .hero-photo-wrap {
+        padding-top: 0;
+      }
+
+      .hero-photo {
+        width: 200px;
+        height: 246px;
+      }
+
+      .hero-stats {
+        max-width: 460px;
+      }
+
 
       section {
         padding: 5rem 2rem;
@@ -1500,7 +1611,12 @@
 
   <nav id="nav">
     <a class="nav-logo" href="#">M·G</a>
-    <ul class="nav-links">
+    <button class="nav-toggle" id="navToggle" aria-expanded="false" aria-controls="navLinks" aria-label="Open menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
       <li><a href="#about">About</a></li>
       <li><a href="#experience">Experience</a></li>
       <li><a href="#research">Research</a></li>
@@ -1532,7 +1648,7 @@
       <div class="hero-photo-wrap">
         <div class="hero-photo-outer">
           <div class="hero-photo">
-            <img src="photo.png" alt="Manuel Gozzi">
+            <img src="photo.jpg" alt="Manuel Gozzi" width="640" height="640">
           </div>
         </div>
         <div class="hero-photo-tag">Bologna · Italy</div>
@@ -1632,242 +1748,7 @@
       <div class="co-lanes" id="coLanes"></div>
     </div>
 
-    <div class="timeline">
-      <div class="timeline-group timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="tg-header">
-          <div class="tg-company">Leithà | Unipol Group</div>
-          <div class="tg-span">JUL 2023 — PRESENT · Bologna</div>
-        </div>
-        <div class="tg-roles">
-          <div class="tg-role">
-            <div class="tg-role-header">
-              <span class="tg-role-title">AI Engineer <span class="tg-badge">Current</span><span class="tg-promo">↑
-                  Promoted</span></span>
-              <span class="tg-role-period">APR 2024 — PRESENT</span>
-            </div>
-            <div class="timeline-desc">
-              Developed an ontology-grounded Data-Linking model using GenAI that suggests insurance products based on
-              the customer characteristics. The ontology is automatically defined using an explorative AI agent.
-              <br><br>
-              Improved a pre-existing multi-agent system tailored to Service Now tickets automation. The usage rate
-              increased from 2% to 25%, still evolving.
-              <br><br>
-              Led the development of a multi-agent system (MAS) for deep insurance policy analysis: agents extract
-              structured data, ground every extracted field to its exact source page(s) in the document, and cross-link
-              related information (e.g. the excess tied to a specific insured location). Achieves an Exact Math of 86%
-              with respect to gold-tagged ground-truth on 20–30 page policies.
-              <br><br>
-              Led the end-to-end development of a specialized extraction pipeline using fine-tuned LLM, reaching a 94%
-              Precision and 96.4% F1-Score on insurance appraisals. Cascaded routing (lightweight classifier then
-              specialized fine-tuned LLM) to minimize GPU compute costs while serving 172k+ daily documents via vLLM.
-              <br><br>
-              Developed an explanation LLM classifier pipeline with SHAP values, custom fine-tuned model and Gemini.
-              <br><br>
-              Developed a CPU-based binary classifier (100ms latency) achieving 94% precision at sub-100ms CPU latency,
-              enabling straight-through processing (STP) for straight-pass emissions without manual review.
-              <br><br>
-              Developed a RAG system for customer service department that runs on CPU, based on semantic chunking, and
-              agentic AI filtering.
-              <br><br>
-              Implemented AI based text-mining appraisals analysis that led to pricing model modifications. Those
-              changes brought to the company a net profit of 500k euros on fire and atmospheric guarantees.
-              <br><br>
-              Developed a document intelligence system that allows uploading a PDF, asking questions, and grounding the
-              answer.
-              <br><br>
-              Developed a Text-to-SQL system to support the BI team at BeRebel in building complex reports. The end user
-              is able to query the database using natural language.
-            </div>
-            <div class="timeline-tech">
-              <span class="tech-pill">Qwen 3</span><span class="tech-pill">vLLM</span><span
-                class="tech-pill">LoRA</span>
-              <span class="tech-pill">GCP</span><span class="tech-pill">AWS</span><span class="tech-pill">RAG</span>
-              <span class="tech-pill">PyTorch</span><span class="tech-pill">Terraform</span><span
-                class="tech-pill">MongoDB</span>
-            </div>
-          </div>
-          <div class="tg-role tg-role-prev">
-            <div class="tg-role-header">
-              <span class="tg-role-title">Software Engineer</span>
-              <span class="tg-role-period">JUL 2023 — MAR 2024</span>
-            </div>
-            <div class="timeline-desc">Within a cross-functional team of 10, developed a web application for insurance
-              price estimation generating an annual margin exceeding €20 million. Architected Kafka consumers for data
-              enrichment and built a mathematical formula parser for the actuarial department.</div>
-            <div class="timeline-tech">
-              <span class="tech-pill">Java 17</span><span class="tech-pill">Spring Boot</span><span
-                class="tech-pill">MongoDB</span>
-              <span class="tech-pill">Kafka</span><span class="tech-pill">Kubernetes</span><span
-                class="tech-pill">OpenShift</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-group timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="tg-header">
-          <div class="tg-company">Università degli Studi "Guglielmo Marconi"</div>
-          <div class="tg-span">OCT 2025 — NOV 2025 · Rome</div>
-        </div>
-        <div class="tg-roles">
-          <div class="tg-role">
-            <div class="tg-role-header">
-              <span class="tg-role-title">Adjunct Lecturer</span>
-              <span class="tg-role-period">OCT 2025 — NOV 2025</span>
-            </div>
-            <div class="timeline-desc">Delivered synchronous online instruction in Educational Methodologies and
-              Technologies within the 30 CFU Teacher Training Program, focusing on innovative laboratory didactics for
-              secondary education teachers.</div>
-            <div class="timeline-tech"><span class="tech-pill">Educational Tech</span><span
-                class="tech-pill">Didactics</span></div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-group timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="tg-header">
-          <div class="tg-company">Isagog</div>
-          <div class="tg-span">APR 2022 — JUN 2023 · Rome</div>
-        </div>
-        <div class="tg-roles">
-          <div class="tg-role">
-            <div class="tg-role-header">
-              <span class="tg-role-title">Research Software Engineer</span>
-              <span class="tg-role-period">APR 2022 — JUN 2023</span>
-            </div>
-            <div class="timeline-desc">Developed "VOICE First" — an AI agent that listens to help-desk conversations in
-              real time and provides operator suggestions, in collaboration with Prof. Guido Vetere. The system employs
-              a high-level neuro-symbolic architecture combining ontology reasoning (Openllet) with deep neural networks
-              for voice understanding. Results published at IEEE MetroXRAINE and HHAI 2023.</div>
-            <div class="timeline-tech">
-              <span class="tech-pill">Neuro-Symbolic AI</span><span class="tech-pill">OWL Ontologies</span><span
-                class="tech-pill">Apache Jena</span>
-              <span class="tech-pill">SPARQL</span><span class="tech-pill">Python</span><span
-                class="tech-pill">GPT-3</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-group timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="tg-header">
-          <div class="tg-company">CINECA</div>
-          <div class="tg-span">JUL 2021 — JUL 2023 · Casalecchio di Reno</div>
-        </div>
-        <div class="tg-roles">
-          <div class="tg-role">
-            <div class="tg-role-header">
-              <span class="tg-role-title">Lead Software Engineer <span class="tg-promo">↑ Promoted</span></span>
-              <span class="tg-role-period">SEP 2022 — JUL 2023</span>
-            </div>
-            <div class="timeline-desc">Promoted after consistently exceeding expectations. Led development of an
-              AI-powered support ticket classification and routing system integrating with JIRA. Architected a
-              microservices framework in Java 17, Python, and Camunda BPM for managing public tender evaluations, with
-              YAML-configurable behavior and UI. Mentored junior colleagues.</div>
-            <div class="timeline-tech">
-              <span class="tech-pill">Java 17</span><span class="tech-pill">Camunda BPM</span><span
-                class="tech-pill">Quarkus</span>
-              <span class="tech-pill">TensorFlow</span><span class="tech-pill">Vue.js</span><span
-                class="tech-pill">Kubernetes</span>
-            </div>
-          </div>
-          <div class="tg-role tg-role-prev">
-            <div class="tg-role-header">
-              <span class="tg-role-title">Software Engineer</span>
-              <span class="tg-role-period">JUL 2021 — AUG 2022</span>
-            </div>
-            <div class="timeline-desc">Developed an internal microservices-based framework for managing public tenders,
-              built as a low-code solution with YAML-configurable behavior and UI. The multi-tenant system, supporting
-              over 7 tenants and ~10,000 applications, ensured maximum control over tenders and workflows.</div>
-            <div class="timeline-tech">
-              <span class="tech-pill">Java 11</span><span class="tech-pill">Spring Boot</span><span
-                class="tech-pill">Quarkus</span>
-              <span class="tech-pill">Vue.js</span><span class="tech-pill">MongoDB</span><span
-                class="tech-pill">Kubernetes</span><span class="tech-pill">Keycloak</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-group timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="tg-header">
-          <div class="tg-company">Engineering Ingegneria Informatica SpA</div>
-          <div class="tg-span">NOV 2018 — JUN 2021 · Bologna</div>
-        </div>
-        <div class="tg-roles">
-          <div class="tg-role">
-            <div class="tg-role-header">
-              <span class="tg-role-title">Software Engineer</span>
-              <span class="tg-role-period">NOV 2018 — JUN 2021</span>
-            </div>
-            <div class="timeline-desc">Developed NoTI-ER — the first Italian solution to fully adopt PEPPOL standards —
-              an e-invoicing platform processing ~10 million documents for Italian Public Administrations with 98%+
-              uptime. Traveled to Belgium to maintain PEPPOL compliance. Deep expertise in XML, XSLT, and enterprise
-              Java architecture.</div>
-            <div class="timeline-tech">
-              <span class="tech-pill">Java</span><span class="tech-pill">Spring</span><span
-                class="tech-pill">PEPPOL</span>
-              <span class="tech-pill">XSLT 2.0</span><span class="tech-pill">SQL</span><span
-                class="tech-pill">SAML2</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-group timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="tg-header">
-          <div class="tg-company">Toyota Material Handling Manufacturing Italy SpA</div>
-          <div class="tg-span">AUG 2017 — OCT 2018 · Bologna</div>
-        </div>
-        <div class="tg-roles">
-          <div class="tg-role">
-            <div class="tg-role-header">
-              <span class="tg-role-title">Software Developer &amp; Analyst</span>
-              <span class="tg-role-period">AUG 2017 — OCT 2018</span>
-            </div>
-            <div class="timeline-desc">Developed various modules for the company's new ERP system, Oracle JD Edwards 9.
-              Participated in collaborative development and analysis sessions as part of a team of 15. Gained in-depth
-              experience with SQL technologies, Kanban methodology, and the Toyota Production System.</div>
-            <div class="timeline-tech">
-              <span class="tech-pill">Oracle JD Edwards 9</span><span class="tech-pill">SQL</span><span
-                class="tech-pill">Kanban</span>
-              <span class="tech-pill">TPS</span><span class="tech-pill">Functional Analysis</span>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div class="timeline-group timeline-item">
-        <div class="timeline-dot"></div>
-        <div class="tg-header">
-          <div class="tg-company">Mobimentum</div>
-          <div class="tg-span">JUN 2017 — JUL 2017 · Casalecchio di Reno</div>
-        </div>
-        <div class="tg-roles">
-          <div class="tg-role">
-            <div class="tg-role-header">
-              <span class="tg-role-title">Software Developer <span class="tg-badge"
-                  style="color:var(--muted);border-color:var(--dim);">Internship</span></span>
-              <span class="tg-role-period">JUN 2017 — JUL 2017</span>
-            </div>
-            <div class="timeline-desc">Developed a web application based on Java 8, Spring Framework, and JHipster — a
-              platform enabling a group of entrepreneurs to communicate through structured question answering.</div>
-            <div class="timeline-tech">
-              <span class="tech-pill">Java SE 8</span><span class="tech-pill">Spring 4</span><span
-                class="tech-pill">JHipster</span>
-              <span class="tech-pill">Angular.js</span><span class="tech-pill">RESTful</span><span
-                class="tech-pill">CSS3</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+    <div class="timeline" id="timelineRoot"></div>
   </section>
 
   <div class="divider"></div>
@@ -1876,41 +1757,41 @@
     <p class="section-tag reveal">Impact</p>
     <h2 class="section-title scramble-in">Results I've delivered.</h2>
     <div class="achievements-grid">
-      <div class="achievement-card reveal tilt"><span class="achievement-icon">⚡</span>
+      <div class="achievement-card reveal tilt"><span class="achievement-icon" aria-hidden="true">⚡</span>
         <div class="achievement-metric">172k+</div>
         <div class="achievement-title">Documents Processed Daily</div>
         <div class="achievement-desc">At <strong>Leithà | Unipol Group</strong>, I designed and deployed a cascaded LLM
           architecture that processes over 172,000 insurance documents every day in production — reliably and at scale.
         </div>
       </div>
-      <div class="achievement-card reveal tilt"><span class="achievement-icon">🎯</span>
+      <div class="achievement-card reveal tilt"><span class="achievement-icon" aria-hidden="true">🎯</span>
         <div class="achievement-metric">96.4%</div>
         <div class="achievement-title">F1-Score on Extraction</div>
         <div class="achievement-desc">By fine-tuning Qwen 3 8B on domain-specific data at <strong>Leithà</strong>, I
           achieved 94% Precision and a 96.4% F1-Score on structured extraction from complex insurance documents.</div>
       </div>
-      <div class="achievement-card reveal tilt"><span class="achievement-icon">💶</span>
+      <div class="achievement-card reveal tilt"><span class="achievement-icon" aria-hidden="true">💶</span>
         <div class="achievement-metric">€500k</div>
         <div class="achievement-title">Simulated Net Profit</div>
         <div class="achievement-desc">At <strong>Leithà</strong>, an AI text-mining pipeline I built to analyse
           insurance appraisals led to pricing model revisions that generated a simulated net gain of €500k on fire and
           atmospheric guarantees.</div>
       </div>
-      <div class="achievement-card reveal tilt"><span class="achievement-icon">📋</span>
+      <div class="achievement-card reveal tilt"><span class="achievement-icon" aria-hidden="true">📋</span>
         <div class="achievement-metric">10M+</div>
         <div class="achievement-title">Documents — 98% Uptime</div>
         <div class="achievement-desc">At <strong>Engineering SpA</strong>, I helped build NoTI-ER — the first Italian
           platform fully compliant with PEPPOL — processing ~10 million e-invoicing documents for public administrations
           with over 98% uptime.</div>
       </div>
-      <div class="achievement-card reveal tilt"><span class="achievement-icon">💰</span>
+      <div class="achievement-card reveal tilt"><span class="achievement-icon" aria-hidden="true">💰</span>
         <div class="achievement-metric">€20M+</div>
         <div class="achievement-title">Annual Margin Generated</div>
         <div class="achievement-desc">As part of a 10-person team at <strong>Leithà</strong>, I co-developed an
           insurance price estimation platform that now generates an annual margin exceeding €20 million for the Unipol
           Group.</div>
       </div>
-      <div class="achievement-card reveal tilt"><span class="achievement-icon">🏎</span>
+      <div class="achievement-card reveal tilt"><span class="achievement-icon" aria-hidden="true">🏎</span>
         <div class="achievement-metric">94%</div>
         <div class="achievement-title">CPU Classifier — 94% Precision, No Human-in-the-Loop</div>
         <div class="achievement-desc">At <strong>Leithà</strong>, I developed a binary classifier running entirely on
@@ -1918,7 +1799,7 @@
           to authorise insurance policy emissions fully automatically, with no human review required. Its decisions also
           align with Gemini 2.5 Pro on 82% of cases, at a fraction of the inference cost.</div>
       </div>
-      <div class="achievement-card reveal tilt"><span class="achievement-icon">🕸️</span>
+      <div class="achievement-card reveal tilt"><span class="achievement-icon" aria-hidden="true">🕸️</span>
         <div class="achievement-metric">94%</div>
         <div class="achievement-title">Multi-Agent Policy Analysis — 94% Mean F1</div>
         <div class="achievement-desc">At <strong>Leithà</strong>, I led the development of a multi-agent system for deep
@@ -1928,7 +1809,7 @@
       </div>
       <!-- Service Now Ticket Automation -->
       <div class="achievement-card reveal tilt">
-        <span class="achievement-icon">📈</span>
+        <span class="achievement-icon" aria-hidden="true">📈</span>
         <div class="achievement-metric">2% → 25%</div>
         <div class="achievement-title">ServiceNow Adoption Boost</div>
         <div class="achievement-desc">Upgraded a multi-agent automation system for ServiceNow IT tickets, driving user
@@ -1937,7 +1818,7 @@
 
       <!-- Text-to-SQL for BeRebel -->
       <div class="achievement-card reveal tilt">
-        <span class="achievement-icon">💬</span>
+        <span class="achievement-icon" aria-hidden="true">💬</span>
         <div class="achievement-metric">Text-to-SQL</div>
         <div class="achievement-title">BI NL-Query Interface</div>
         <div class="achievement-desc">Built a natural language interface for BeRebel's BI team, enabling non-technical
@@ -1946,7 +1827,7 @@
 
       <!-- Ontology Data-Linking -->
       <div class="achievement-card reveal tilt">
-        <span class="achievement-icon">🔗</span>
+        <span class="achievement-icon" aria-hidden="true">🔗</span>
         <div class="achievement-metric">Agentic</div>
         <div class="achievement-title">Ontology Data-Linking</div>
         <div class="achievement-desc">Engineered an explorative AI agent that dynamically builds ontologies to match
@@ -1955,7 +1836,7 @@
 
       <!-- CPU-Based RAG System -->
       <div class="achievement-card reveal tilt">
-        <span class="achievement-icon">⚙️</span>
+        <span class="achievement-icon" aria-hidden="true">⚙️</span>
         <div class="achievement-metric">CPU RAG</div>
         <div class="achievement-title">Agentic Knowledge Base</div>
         <div class="achievement-desc">Deployed a low-latency CPU-bound RAG system for customer service, using semantic
@@ -1964,7 +1845,7 @@
 
       <!-- Explainable AI Pipeline -->
       <div class="achievement-card reveal tilt">
-        <span class="achievement-icon">🔍</span>
+        <span class="achievement-icon" aria-hidden="true">🔍</span>
         <div class="achievement-metric">XAI</div>
         <div class="achievement-title">Explainable Classifier</div>
         <div class="achievement-desc">Designed an interpretable classification pipeline combining custom fine-tuned
@@ -1987,77 +1868,7 @@
       <div style="font-size:1.1rem;color:var(--muted);line-height:1.6;">Peer-reviewed articles and conference
         proceedings across Q1/Q2 journals and top-tier venues in AI, NLP, and Software Engineering.</div>
     </div>
-    <div class="pub-list">
-      <div class="pub-item"><span class="pub-index">09</span>
-        <div>
-          <div class="pub-title">Optimizing Input Representations for Word-in-Context: A Controlled Ablation Study</div>
-          <div class="pub-venue">AIxIA 2026 – Advances in Artificial Intelligence</div><span
-            class="pub-date">3rd October 2026</span><a class="tg-link"
-            href="https://doi.org/10.1007/978-3-032-40774-0_18" target="_blank">Springer ↗</a>
-        </div><span class="pub-badge conf">Conference</span>
-      </div>
-      <div class="pub-item"><span class="pub-index">08</span>
-        <div>
-          <div class="pub-title">Do LLMs Know Basic Italian? Evaluating Lexical Competence through Dictionary Entry
-            Generation against the De Mauro Basic Vocabulary</div>
-          <div class="pub-venue">CLiC-it 2026: Twelfth Italian Conference on Computational Linguistics</div><span
-            class="pub-date">16th September 2026</span><a class="tg-link"
-            href="https://clic2026.unipa.it/wp-content/uploads/2026/09/55_main_long.pdf" target="_blank">Pre-Proceedings
-            ↗</a>
-        </div><span class="pub-badge conf">Conference</span>
-      </div>
-      <div class="pub-item"><span class="pub-index">07</span>
-        <div>
-          <div class="pub-title">Emotional Framing in Prompts Modulates Large Language Model Performance</div>
-          <div class="pub-venue">MDPI - Big Data and Cognitive Computing</div><span class="pub-date">24th March
-            2026</span><a class="tg-link" href="https://doi.org/10.3390/bdcc10040102" target="_blank">DOI ↗</a>
-        </div><span class="pub-badge q2">Q2 Journal</span>
-      </div>
-      <div class="pub-item"><span class="pub-index">06</span>
-        <div>
-          <div class="pub-title">Bidirectional Emotional Influence in Human–LLM Interaction</div>
-          <div class="pub-venue">CLiC-it 2025: Eleventh Italian Conference on Computational Linguistics</div><span
-            class="pub-date">30th November 2025</span><a class="tg-link"
-            href="https://aclanthology.org/2025.clicit-1.48.pdf" target="_blank">ACL Anthology ↗</a>
-        </div><span class="pub-badge conf">Conference</span>
-      </div>
-      <div class="pub-item"><span class="pub-index">05</span>
-        <div>
-          <div class="pub-title">Degradation of Multi-Task Prompting Across Six NLP Tasks and LLM Families</div>
-          <div class="pub-venue">MDPI - Electronics</div><span class="pub-date">6th November 2025</span><a
-            class="tg-link" href="https://doi.org/10.3390/electronics14214349" target="_blank">DOI ↗</a>
-        </div><span class="pub-badge q2">Q2 Journal</span>
-      </div>
-      <div class="pub-item"><span class="pub-index">04</span>
-        <div>
-          <div class="pub-title">Comparative Analysis of Prompt Strategies for LLMs: Single-Task vs. Multitask Prompts
-          </div>
-          <div class="pub-venue">MDPI - Electronics</div><span class="pub-date">28th November 2024</span><a
-            class="tg-link" href="https://doi.org/10.3390/electronics13234712" target="_blank">DOI ↗</a>
-        </div><span class="pub-badge q2">Q2 Journal</span>
-      </div>
-      <div class="pub-item"><span class="pub-index">03</span>
-        <div>
-          <div class="pub-title">Puzzle Pattern — A Systematic Approach to Multiple Behavioral Inheritance in OOP</div>
-          <div class="pub-venue">MDPI - Applied Sciences</div><span class="pub-date">11th June 2024</span><a
-            class="tg-link" href="https://doi.org/10.3390/app14125083" target="_blank">DOI ↗</a>
-        </div><span class="pub-badge q1">Q1 Journal</span>
-      </div>
-      <div class="pub-item"><span class="pub-index">02</span>
-        <div>
-          <div class="pub-title">VOICE-FIRST: Supporting Human Assistants with Real-time Voice Understanding</div>
-          <div class="pub-venue">IEEE MetroXRAINE 2023</div><span class="pub-date">20th July 2023</span><a
-            class="tg-link" href="https://ieeexplore.ieee.org/abstract/document/10405568" target="_blank">IEEE ↗</a>
-        </div><span class="pub-badge conf">Conference</span>
-      </div>
-      <div class="pub-item"><span class="pub-index">01</span>
-        <div>
-          <div class="pub-title">Assisting the Assistant: A Cobot for Voice Customer Support</div>
-          <div class="pub-venue">HHAI 2023</div><span class="pub-date">3rd April 2023</span><a class="tg-link"
-            href="https://ebooks.iospress.nl/volumearticle/63344" target="_blank">IOS Press ↗</a>
-        </div><span class="pub-badge conf">Conference</span>
-      </div>
-    </div>
+    <div class="pub-list" id="pubList"></div>
   </section>
 
   <div class="divider"></div>
@@ -2100,12 +1911,15 @@
         neuro-symbolic systems — I'm always open to a good exchange of ideas.</p>
       <a href="mailto:gozzigg@gmail.com" class="btn filled magnetic">Email Me</a>
       <div class="contact-links">
-        <a href="https://www.linkedin.com/in/manuelgozzi" class="contact-link" target="_blank">LinkedIn</a>
-        <a href="https://scholar.google.com/citations?user=CaLCQLsAAAAJ" class="contact-link" target="_blank">Google
+        <a href="https://www.linkedin.com/in/manuelgozzi" class="contact-link" target="_blank"
+          rel="noopener noreferrer">LinkedIn</a>
+        <a href="https://scholar.google.com/citations?user=CaLCQLsAAAAJ" class="contact-link" target="_blank"
+          rel="noopener noreferrer">Google
           Scholar</a>
-        <a href="https://www.researchgate.net/profile/Manuel-Gozzi" class="contact-link"
-          target="_blank">ResearchGate</a>
-        <a href="https://orcid.org/0009-0003-9487-7160" class="contact-link" target="_blank">ORCID</a>
+        <a href="https://www.researchgate.net/profile/Manuel-Gozzi" class="contact-link" target="_blank"
+          rel="noopener noreferrer">ResearchGate</a>
+        <a href="https://orcid.org/0009-0003-9487-7160" class="contact-link" target="_blank"
+          rel="noopener noreferrer">ORCID</a>
       </div>
     </div>
   </section>
@@ -2118,6 +1932,303 @@
   <script>
     /* ═══════════════ CORE ═══════════════ */
     const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    /* ═══════════════ DATA ═══════════════ */
+    const TODAY = new Date();
+    const d = (y, m, day = 1) => new Date(y, m - 1, day);
+
+    const PUBS = [
+      { idx: '09', title: 'Optimizing Input Representations for Word-in-Context: A Controlled Ablation Study', venue: 'AIxIA 2026 – Advances in Artificial Intelligence', badge: 'conf', badgeLabel: 'Conference', date: '3rd October 2026', link: 'https://doi.org/10.1007/978-3-032-40774-0_18', linkLabel: 'Springer ↗' },
+      { idx: '08', title: 'Do LLMs Know Basic Italian? Evaluating Lexical Competence through Dictionary Entry Generation against the De Mauro Basic Vocabulary', venue: 'CLiC-it 2026: Twelfth Italian Conference on Computational Linguistics', badge: 'conf', badgeLabel: 'Conference', date: '16th September 2026', link: 'https://clic2026.unipa.it/wp-content/uploads/2026/09/55_main_long.pdf', linkLabel: 'Pre-Proceedings ↗' },
+      { idx: '07', title: 'Emotional Framing in Prompts Modulates Large Language Model Performance', venue: 'MDPI - Big Data and Cognitive Computing', badge: 'q2', badgeLabel: 'Q2 Journal', date: '24th March 2026', link: 'https://doi.org/10.3390/bdcc10040102', linkLabel: 'DOI ↗' },
+      { idx: '06', title: 'Bidirectional Emotional Influence in Human–LLM Interaction', venue: 'CLiC-it 2025: Eleventh Italian Conference on Computational Linguistics', badge: 'conf', badgeLabel: 'Conference', date: '30th November 2025', link: 'https://aclanthology.org/2025.clicit-1.48.pdf', linkLabel: 'ACL Anthology ↗' },
+      { idx: '05', title: 'Degradation of Multi-Task Prompting Across Six NLP Tasks and LLM Families', venue: 'MDPI - Electronics', badge: 'q2', badgeLabel: 'Q2 Journal', date: '6th November 2025', link: 'https://doi.org/10.3390/electronics14214349', linkLabel: 'DOI ↗' },
+      { idx: '04', title: 'Comparative Analysis of Prompt Strategies for LLMs: Single-Task vs. Multitask Prompts', venue: 'MDPI - Electronics', badge: 'q2', badgeLabel: 'Q2 Journal', date: '28th November 2024', link: 'https://doi.org/10.3390/electronics13234712', linkLabel: 'DOI ↗' },
+      { idx: '03', title: 'Puzzle Pattern — A Systematic Approach to Multiple Behavioral Inheritance in OOP', venue: 'MDPI - Applied Sciences', badge: 'q1', badgeLabel: 'Q1 Journal', date: '11th June 2024', link: 'https://doi.org/10.3390/app14125083', linkLabel: 'DOI ↗' },
+      { idx: '02', title: 'VOICE-FIRST: Supporting Human Assistants with Real-time Voice Understanding', venue: 'IEEE MetroXRAINE 2023', badge: 'conf', badgeLabel: 'Conference', date: '20th July 2023', link: 'https://ieeexplore.ieee.org/abstract/document/10405568', linkLabel: 'IEEE ↗' },
+      { idx: '01', title: 'Assisting the Assistant: A Cobot for Voice Customer Support', venue: 'HHAI 2023', badge: 'conf', badgeLabel: 'Conference', date: '3rd April 2023', link: 'https://ebooks.iospress.nl/volumearticle/63344', linkLabel: 'IOS Press ↗' }
+    ];
+
+    const CAREER = [
+      {
+        company: 'Leithà | Unipol Group',
+        span: 'JUL 2023 — PRESENT · Bologna',
+        gantt: { order: 8, label: 'Leithà | Unipol' },
+        roles: [
+          {
+            title: 'AI Engineer', badge: 'Current', promo: true, period: 'APR 2024 — PRESENT',
+            desc: `Developed an ontology-grounded Data-Linking model using GenAI that suggests insurance products based on
+              the customer characteristics. The ontology is automatically defined using an explorative AI agent.
+              <br><br>
+              Improved a pre-existing multi-agent system tailored to Service Now tickets automation. The usage rate
+              increased from 2% to 25%, still evolving.
+              <br><br>
+              Led the development of a multi-agent system (MAS) for deep insurance policy analysis: agents extract
+              structured data, ground every extracted field to its exact source page(s) in the document, and cross-link
+              related information (e.g. the excess tied to a specific insured location). Achieves an Exact Match of 86%
+              with respect to gold-tagged ground-truth on 20–30 page policies.
+              <br><br>
+              Led the end-to-end development of a specialized extraction pipeline using fine-tuned LLM, reaching a 94%
+              Precision and 96.4% F1-Score on insurance appraisals. Cascaded routing (lightweight classifier then
+              specialized fine-tuned LLM) to minimize GPU compute costs while serving 172k+ daily documents via vLLM.
+              <br><br>
+              Developed an explanation LLM classifier pipeline with SHAP values, custom fine-tuned model and Gemini.
+              <br><br>
+              Developed a CPU-based binary classifier (100ms latency) achieving 94% precision at sub-100ms CPU latency,
+              enabling straight-through processing (STP) for straight-pass emissions without manual review.
+              <br><br>
+              Developed a RAG system for customer service department that runs on CPU, based on semantic chunking, and
+              agentic AI filtering.
+              <br><br>
+              Implemented AI based text-mining appraisals analysis that led to pricing model modifications. Those
+              changes brought the company a net profit of 500k euros on fire and atmospheric guarantees.
+              <br><br>
+              Developed a document intelligence system that allows uploading a PDF, asking questions, and grounding the
+              answer.
+              <br><br>
+              Developed a Text-to-SQL system to support the BI team at BeRebel in building complex reports. The end user
+              is able to query the database using natural language.`,
+            tech: ['Qwen 3', 'vLLM', 'LoRA', 'GCP', 'AWS', 'RAG', 'PyTorch', 'Terraform', 'MongoDB'],
+            bar: { role: 'AI Engineer ↑', start: d(2024, 4), end: TODAY, cls: 'res', tags: ['Qwen 3', 'vLLM', 'LoRA', 'RAG', '172k docs/day'] }
+          },
+          {
+            title: 'Software Engineer', prev: true, period: 'JUL 2023 — MAR 2024',
+            desc: `Within a cross-functional team of 10, developed a web application for insurance price estimation generating an
+              annual margin exceeding €20 million. Architected Kafka consumers for data enrichment and built a
+              mathematical formula parser for the actuarial department.`,
+            tech: ['Java 17', 'Spring Boot', 'MongoDB', 'Kafka', 'Kubernetes', 'OpenShift'],
+            bar: { role: 'Software Engineer', start: d(2023, 7), end: d(2024, 3, 31), cls: 'eng', tags: ['Java 17', 'Kafka', 'MongoDB'] }
+          }
+        ]
+      },
+      {
+        company: 'Università degli Studi "Guglielmo Marconi"',
+        span: 'OCT 2025 — NOV 2025 · Rome',
+        gantt: { order: 9, label: 'Lecturer' },
+        roles: [
+          {
+            title: 'Adjunct Lecturer', period: 'OCT 2025 — NOV 2025',
+            desc: `Delivered synchronous online instruction in Educational Methodologies and Technologies within the 30 CFU
+              Teacher Training Program, focusing on innovative laboratory didactics for secondary education teachers.`,
+            tech: ['Educational Tech', 'Didactics'],
+            bar: { role: 'Adjunct Lecturer', start: d(2025, 10), end: d(2025, 11, 30), cls: 'phd', tags: ['30 CFU Program'] }
+          }
+        ]
+      },
+      {
+        company: 'Isagog',
+        span: 'APR 2022 — JUN 2023 · Rome',
+        gantt: { order: 6, label: 'Isagog' },
+        roles: [
+          {
+            title: 'Research Software Engineer', period: 'APR 2022 — JUN 2023',
+            desc: `Developed "VOICE First" — an AI agent that listens to help-desk conversations in real time and provides
+              operator suggestions, in collaboration with Prof. Guido Vetere. The system employs a high-level
+              neuro-symbolic architecture combining ontology reasoning (Openllet) with deep neural networks for voice
+              understanding. Results published at IEEE MetroXRAINE and HHAI 2023.`,
+            tech: ['Neuro-Symbolic AI', 'OWL Ontologies', 'Apache Jena', 'SPARQL', 'Python', 'GPT-3'],
+            bar: { role: 'Research Software Engineer', start: d(2022, 4), end: d(2023, 6, 30), cls: 'res', tags: ['Neuro-Symbolic AI', 'OWL', 'SPARQL', 'IEEE / HHAI'] }
+          }
+        ]
+      },
+      {
+        company: 'CINECA',
+        span: 'JUL 2021 — JUL 2023 · Casalecchio di Reno',
+        gantt: { order: 5, label: 'CINECA' },
+        roles: [
+          {
+            title: 'Lead Software Engineer', promo: true, period: 'SEP 2022 — JUL 2023',
+            desc: `Promoted after consistently exceeding expectations. Led development of an AI-powered support ticket
+              classification and routing system integrating with JIRA. Architected a microservices framework in Java 17,
+              Python, and Camunda BPM for managing public tender evaluations, with YAML-configurable behavior and UI.
+              Mentored junior colleagues.`,
+            tech: ['Java 17', 'Camunda BPM', 'Quarkus', 'TensorFlow', 'Vue.js', 'Kubernetes'],
+            bar: { role: 'Lead Software Engineer ↑', start: d(2022, 9), end: d(2023, 7, 31), cls: 'eng', tags: ['Java 17', 'Camunda BPM', 'TensorFlow'] }
+          },
+          {
+            title: 'Software Engineer', prev: true, period: 'JUL 2021 — AUG 2022',
+            desc: `Developed an internal microservices-based framework for managing public tenders, built as a low-code
+              solution with YAML-configurable behavior and UI. The multi-tenant system, supporting over 7 tenants and
+              ~10,000 applications, ensured maximum control over tenders and workflows.`,
+            tech: ['Java 11', 'Spring Boot', 'Quarkus', 'Vue.js', 'MongoDB', 'Kubernetes', 'Keycloak'],
+            bar: { role: 'Software Engineer', start: d(2021, 7), end: d(2022, 8, 31), cls: 'eng', tags: ['Java 11', 'Quarkus', 'Kubernetes'] }
+          }
+        ]
+      },
+      {
+        company: 'Engineering Ingegneria Informatica SpA',
+        span: 'NOV 2018 — JUN 2021 · Bologna',
+        gantt: { order: 3, label: 'Engineering SpA' },
+        roles: [
+          {
+            title: 'Software Engineer', period: 'NOV 2018 — JUN 2021',
+            desc: `Developed NoTI-ER — the first Italian solution to fully adopt PEPPOL standards — an e-invoicing platform
+              processing ~10 million documents for Italian Public Administrations with 98%+ uptime. Traveled to Belgium to
+              maintain PEPPOL compliance. Deep expertise in XML, XSLT, and enterprise Java architecture.`,
+            tech: ['Java', 'Spring', 'PEPPOL', 'XSLT 2.0', 'SQL', 'SAML2'],
+            bar: { role: 'Software Engineer', start: d(2018, 11), end: d(2021, 6, 30), cls: 'eng', tags: ['Java', 'PEPPOL', 'XSLT 2.0', '10M+ docs/yr'] }
+          }
+        ]
+      },
+      {
+        company: 'Toyota Material Handling Manufacturing Italy SpA',
+        span: 'AUG 2017 — OCT 2018 · Bologna',
+        gantt: { order: 2, label: 'Toyota MHMI' },
+        roles: [
+          {
+            title: 'Software Developer & Analyst', period: 'AUG 2017 — OCT 2018',
+            desc: `Developed various modules for the company's new ERP system, Oracle JD Edwards 9. Participated in
+              collaborative development and analysis sessions as part of a team of 15. Gained in-depth experience with SQL
+              technologies, Kanban methodology, and the Toyota Production System.`,
+            tech: ['Oracle JD Edwards 9', 'SQL', 'Kanban', 'TPS', 'Functional Analysis'],
+            bar: { role: 'Software Dev & Analyst', start: d(2017, 8), end: d(2018, 10, 31), cls: 'eng', tags: ['Oracle JD Edwards 9', 'SQL', 'Kanban'] }
+          }
+        ]
+      },
+      {
+        company: 'Mobimentum',
+        span: 'JUN 2017 — JUL 2017 · Casalecchio di Reno',
+        gantt: { order: 1, label: 'Mobimentum' },
+        roles: [
+          {
+            title: 'Software Developer', badge: 'Internship', badgeStyle: 'muted', period: 'JUN 2017 — JUL 2017',
+            desc: `Developed a web application based on Java 8, Spring Framework, and JHipster — a platform enabling a group of
+              entrepreneurs to communicate through structured question answering.`,
+            tech: ['Java SE 8', 'Spring 4', 'JHipster', 'Angular.js', 'RESTful', 'CSS3'],
+            bar: { role: 'Software Developer', start: d(2017, 6), end: d(2017, 7, 31), cls: 'eng', tags: ['Java SE 8', 'Spring 4', 'JHipster'] }
+          }
+        ]
+      },
+      {
+        gantt: { order: 4, label: 'BSc — Marconi', bars: [{ role: 'BSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2019, 3), end: d(2022, 3, 31), cls: 'edu', tags: ['Computer Engineering'] }] }
+      },
+      {
+        gantt: { order: 7, label: 'MSc — Marconi', bars: [{ role: 'MSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2023, 8), end: d(2025, 5, 31), cls: 'edu', tags: ['Digital Transformation', 'Data Science'] }] }
+      },
+      {
+        gantt: { order: 10, label: 'PhD — Marconi', bars: [{ role: 'PhD Candidate', company: 'Università Guglielmo Marconi', start: d(2025, 11), end: TODAY, cls: 'phd', tags: ['Neuro-Symbolic AI', 'JENeSyM', 'Poincaré'] }] }
+      }
+    ];
+
+    /* ═══════════════ RENDERERS ═══════════════ */
+    function renderPubs() {
+      const list = document.getElementById('pubList');
+      PUBS.forEach(p => {
+        const item = document.createElement('div');
+        item.className = 'pub-item';
+        const index = document.createElement('span');
+        index.className = 'pub-index';
+        index.textContent = p.idx;
+        const body = document.createElement('div');
+        const title = document.createElement('div');
+        title.className = 'pub-title';
+        title.textContent = p.title;
+        const venue = document.createElement('div');
+        venue.className = 'pub-venue';
+        venue.textContent = p.venue;
+        const date = document.createElement('span');
+        date.className = 'pub-date';
+        date.textContent = p.date;
+        const link = document.createElement('a');
+        link.className = 'tg-link';
+        link.href = p.link;
+        link.target = '_blank';
+        link.rel = 'noopener noreferrer';
+        link.textContent = p.linkLabel;
+        body.append(title, venue, date, link);
+        const badge = document.createElement('span');
+        badge.className = 'pub-badge ' + p.badge;
+        badge.textContent = p.badgeLabel;
+        item.append(index, body, badge);
+        list.appendChild(item);
+      });
+    }
+
+    function renderTimeline() {
+      const root = document.getElementById('timelineRoot');
+      CAREER.forEach(group => {
+        if (!group.roles) return;
+        const g = document.createElement('div');
+        g.className = 'timeline-group timeline-item';
+        const dot = document.createElement('div');
+        dot.className = 'timeline-dot';
+        g.appendChild(dot);
+        const header = document.createElement('div');
+        header.className = 'tg-header';
+        const company = document.createElement('div');
+        company.className = 'tg-company';
+        company.textContent = group.company;
+        const span = document.createElement('div');
+        span.className = 'tg-span';
+        span.textContent = group.span;
+        header.append(company, span);
+        g.appendChild(header);
+        const roles = document.createElement('div');
+        roles.className = 'tg-roles';
+        group.roles.forEach(r => {
+          const role = document.createElement('div');
+          role.className = 'tg-role' + (r.prev ? ' tg-role-prev' : '');
+          const rh = document.createElement('div');
+          rh.className = 'tg-role-header';
+          const title = document.createElement('span');
+          title.className = 'tg-role-title';
+          title.textContent = r.title;
+          if (r.badge) {
+            const b = document.createElement('span');
+            b.className = 'tg-badge';
+            if (r.badgeStyle === 'muted') b.setAttribute('style', 'color:var(--muted);border-color:var(--dim);');
+            b.textContent = r.badge;
+            title.appendChild(b);
+          }
+          if (r.promo) {
+            const p = document.createElement('span');
+            p.className = 'tg-promo';
+            p.textContent = '↑ Promoted';
+            title.appendChild(p);
+          }
+          const period = document.createElement('span');
+          period.className = 'tg-role-period';
+          period.textContent = r.period;
+          rh.append(title, period);
+          const desc = document.createElement('div');
+          desc.className = 'timeline-desc';
+          desc.innerHTML = r.desc;
+          const tech = document.createElement('div');
+          tech.className = 'timeline-tech';
+          (r.tech || []).forEach(t => {
+            const s = document.createElement('span');
+            s.className = 'tech-pill';
+            s.textContent = t;
+            tech.appendChild(s);
+          });
+          role.append(rh, desc, tech);
+          roles.appendChild(role);
+        });
+        g.appendChild(roles);
+        root.appendChild(g);
+      });
+    }
+    renderPubs();
+    renderTimeline();
+
+    /* ═══════════════ MOBILE NAV ═══════════════ */
+    (function () {
+      const btn = document.getElementById('navToggle');
+      const menu = document.getElementById('navLinks');
+      if (!btn || !menu) return;
+      const close = () => {
+        menu.classList.remove('open');
+        btn.setAttribute('aria-expanded', 'false');
+        btn.setAttribute('aria-label', 'Open menu');
+      };
+      btn.addEventListener('click', () => {
+        const open = menu.classList.toggle('open');
+        btn.setAttribute('aria-expanded', String(open));
+        btn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+      });
+      menu.querySelectorAll('a').forEach(a => a.addEventListener('click', close));
+    })();
+
 
     function calculateYearsOfExperience() {
       const startDate = new Date('2017-06-01'), today = new Date();
@@ -2134,7 +2245,7 @@
     const yText = document.getElementById('yearsInText');
     if (yText) yText.textContent = yearsExp <= 15 ? words[yearsExp] : yearsExp;
 
-    const pubs = document.querySelectorAll('.pub-item').length;
+    const pubs = PUBS.length;
     const pc = document.getElementById('pubCount'); if (pc) pc.textContent = pubs;
     const ph = document.getElementById('publicationsInHero'); if (ph) ph.dataset.count = pubs;
 
@@ -2210,6 +2321,7 @@
     /* ═══════════════ SCRAMBLE TEXT ═══════════════ */
     const GLYPHS = 'アイウエオ01<>{}[]=+*#$/\\';
     function scramble(el, finalText, duration = 900) {
+      el.setAttribute('aria-label', finalText);
       if (reducedMotion) { el.textContent = finalText; return; }
       const len = finalText.length;
       const start = performance.now();
@@ -2272,6 +2384,7 @@
     /* ═══════════════ WORD ROTATOR ═══════════════ */
     (function () {
       const el = document.getElementById('rotator');
+      if (!el || reducedMotion) return;
       const words = ['neural perception', 'hyperbolic geometry', 'multi-agent systems', 'knowledge graphs', 'symbolic reasoning'];
       let i = 0;
       setInterval(() => {
@@ -2359,79 +2472,115 @@
 
     /* ═══════════════ CAREER TIMELINE (GANTT) ═══════════════ */
     (function () {
-      const START = new Date(2017, 0, 1), END = new Date(2026, 8, 1), TODAY = new Date();
+      const START = new Date(2017, 0, 1);
+      const END = new Date(TODAY.getFullYear() + 1, TODAY.getMonth(), 1);
       const totalMs = END - START;
       const pct = date => Math.max(0, Math.min(100, ((date - START) / totalMs) * 100));
-      const d = (y, m, day = 1) => new Date(y, m - 1, day);
       const fmtDate = (dt, isPresent) => isPresent ? 'Present' : dt.toLocaleDateString('en-GB', { month: 'short', year: 'numeric' }).toUpperCase();
 
-      const LANES = [
-        { label: 'Mobimentum', bars: [{ role: 'Software Developer', company: 'Mobimentum', start: d(2017, 6), end: d(2017, 7, 31), cls: 'eng', tags: ['Java SE 8', 'Spring 4', 'JHipster'] }] },
-        { label: 'Toyota MHMI', bars: [{ role: 'Software Dev & Analyst', company: 'Toyota Material Handling Mfg Italy SpA', start: d(2017, 8), end: d(2018, 10, 31), cls: 'eng', tags: ['Oracle JD Edwards 9', 'SQL', 'Kanban'] }] },
-        { label: 'Engineering SpA', bars: [{ role: 'Software Engineer', company: 'Engineering Ingegneria Informatica SpA', start: d(2018, 11), end: d(2021, 6, 30), cls: 'eng', tags: ['Java', 'PEPPOL', 'XSLT 2.0', '10M+ docs/yr'] }] },
-        { label: 'BSc — Marconi', bars: [{ role: 'BSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2019, 3), end: d(2022, 3, 31), cls: 'edu', tags: ['Computer Engineering'] }] },
-        {
-          label: 'CINECA', bars: [
-            { role: 'Software Engineer', company: 'CINECA', start: d(2021, 7), end: d(2022, 8, 31), cls: 'eng', tags: ['Java 11', 'Quarkus', 'Kubernetes'] },
-            { role: 'Lead Software Engineer ↑', company: 'CINECA', start: d(2022, 9), end: d(2023, 7, 31), cls: 'eng', tags: ['Java 17', 'Camunda BPM', 'TensorFlow'] }
-          ]
-        },
-        { label: 'Isagog', bars: [{ role: 'Research Software Engineer', company: 'Isagog', start: d(2022, 4), end: d(2023, 6, 30), cls: 'res', tags: ['Neuro-Symbolic AI', 'OWL', 'SPARQL', 'IEEE / HHAI'] }] },
-        { label: 'MSc — Marconi', bars: [{ role: 'MSc — Computer Engineering', company: 'Università Guglielmo Marconi', start: d(2023, 8), end: d(2025, 5, 31), cls: 'edu', tags: ['Digital Transformation', 'Data Science'] }] },
-        {
-          label: 'Leithà | Unipol', bars: [
-            { role: 'Software Engineer', company: 'Leithà | Unipol Group', start: d(2023, 7), end: d(2024, 3, 31), cls: 'eng', tags: ['Java 17', 'Kafka', 'MongoDB'] },
-            { role: 'AI Engineer ↑', company: 'Leithà | Unipol Group', start: d(2024, 4), end: TODAY, cls: 'res', tags: ['Qwen 3', 'vLLM', 'LoRA', 'RAG', '172k docs/day'] }
-          ]
-        },
-        { label: 'Lecturer', bars: [{ role: 'Adjunct Lecturer', company: 'Università Guglielmo Marconi', start: d(2025, 10), end: d(2025, 11, 30), cls: 'phd', tags: ['30 CFU Program'] }] },
-        { label: 'PhD — Marconi', bars: [{ role: 'PhD Candidate', company: 'Università Guglielmo Marconi', start: d(2025, 11), end: TODAY, cls: 'phd', tags: ['Neuro-Symbolic AI', 'JENeSyM', 'Poincaré'] }] }
-      ];
+      const LANES = CAREER
+        .filter(c => c.gantt)
+        .sort((a, b) => a.gantt.order - b.gantt.order)
+        .map(c => ({
+          label: c.gantt.label,
+          bars: c.gantt.bars || (c.roles || []).filter(r => r.bar).map(r => ({
+            role: r.bar.role || r.title,
+            company: c.company,
+            start: r.bar.start,
+            end: r.bar.end,
+            cls: r.bar.cls,
+            tags: r.bar.tags
+          }))
+        }));
 
       const axisEl = document.getElementById('coAxisYears');
-      for (let y = 2017; y <= 2027; y++) {
+      for (let y = START.getFullYear(); y <= END.getFullYear(); y++) {
         const left = pct(new Date(y, 0, 1));
         if (left < 0 || left > 100) continue;
         const tick = document.createElement('div');
-        tick.className = 'co-year-tick'; tick.style.left = left + '%';
-        const sp = document.createElement('span'); sp.textContent = y;
-        tick.appendChild(sp); axisEl.appendChild(tick);
+        tick.className = 'co-year-tick';
+        tick.style.left = left + '%';
+        const sp = document.createElement('span');
+        sp.textContent = y;
+        tick.appendChild(sp);
+        axisEl.appendChild(tick);
       }
 
       const lanesEl = document.getElementById('coLanes');
       const tooltip = document.createElement('div');
       tooltip.className = 'co-tooltip';
-      tooltip.innerHTML = `<div class="co-tt-role" id="coTtRole"></div><div class="co-tt-company" id="coTtCompany"></div><div class="co-tt-period" id="coTtPeriod"></div><div class="co-tt-tags" id="coTtTags"></div>`;
+      tooltip.innerHTML = '<div class="co-tt-role" id="coTtRole"></div><div class="co-tt-company" id="coTtCompany"></div><div class="co-tt-period" id="coTtPeriod"></div><div class="co-tt-tags" id="coTtTags"></div>';
       document.body.appendChild(tooltip);
+
+      function fillTooltip(b) {
+        document.getElementById('coTtRole').textContent = b.role;
+        document.getElementById('coTtCompany').textContent = b.company;
+        document.getElementById('coTtPeriod').textContent = fmtDate(b.start) + ' — ' + fmtDate(b.end, b.end >= TODAY);
+        const tagsEl = document.getElementById('coTtTags');
+        tagsEl.innerHTML = '';
+        b.tags.forEach(t => {
+          const s = document.createElement('span');
+          s.className = 'co-tt-tag';
+          s.textContent = t;
+          tagsEl.appendChild(s);
+        });
+      }
+      function placeTooltip(x, y) {
+        let tx = x + 16;
+        if (tx + 310 > window.innerWidth) tx = x - 316;
+        tooltip.style.left = tx + 'px';
+        tooltip.style.top = (y - 14) + 'px';
+      }
+      const showTooltip = () => tooltip.classList.add('visible');
+      const hideTooltip = () => tooltip.classList.remove('visible');
+      let touchShown = null;
 
       const bars = [];
       LANES.forEach(lane => {
-        const row = document.createElement('div'); row.className = 'co-lane-row';
-        const lbl = document.createElement('div'); lbl.className = 'co-lane-label'; lbl.textContent = lane.label;
+        const row = document.createElement('div');
+        row.className = 'co-lane-row';
+        const lbl = document.createElement('div');
+        lbl.className = 'co-lane-label';
+        lbl.textContent = lane.label;
         row.appendChild(lbl);
-        const track = document.createElement('div'); track.className = 'co-track';
+        const track = document.createElement('div');
+        track.className = 'co-track';
         lane.bars.forEach(b => {
-          const bar = document.createElement('div'); bar.className = 'co-bar ' + b.cls;
+          const bar = document.createElement('div');
+          bar.className = 'co-bar ' + b.cls;
           const l = pct(b.start), w = Math.max(pct(b.end) - l, 0.35);
-          bar.style.left = l + '%'; bar.style.width = '0%';
-          const txt = document.createElement('span'); txt.className = 'co-bar-text'; txt.textContent = b.role;
+          bar.style.left = l + '%';
+          bar.style.width = '0%';
+          const txt = document.createElement('span');
+          txt.className = 'co-bar-text';
+          txt.textContent = b.role;
           bar.appendChild(txt);
-          bar.addEventListener('mouseenter', () => tooltip.classList.add('visible'));
-          bar.addEventListener('mouseleave', () => tooltip.classList.remove('visible'));
-          bar.addEventListener('mousemove', e => {
-            document.getElementById('coTtRole').textContent = b.role;
-            document.getElementById('coTtCompany').textContent = b.company;
-            document.getElementById('coTtPeriod').textContent = fmtDate(b.start) + ' — ' + fmtDate(b.end, b.end >= TODAY);
-            const tagsEl = document.getElementById('coTtTags'); tagsEl.innerHTML = '';
-            b.tags.forEach(t => { const s = document.createElement('span'); s.className = 'co-tt-tag'; s.textContent = t; tagsEl.appendChild(s); });
-            let tx = e.clientX + 16;
-            if (tx + 310 > window.innerWidth) tx = e.clientX - 316;
-            tooltip.style.left = tx + 'px'; tooltip.style.top = (e.clientY - 14) + 'px';
+          bar.tabIndex = 0;
+          bar.setAttribute('aria-label', b.role + ' at ' + b.company + ', ' + fmtDate(b.start) + ' to ' + fmtDate(b.end, b.end >= TODAY));
+          bar.addEventListener('mouseenter', showTooltip);
+          bar.addEventListener('mouseleave', hideTooltip);
+          bar.addEventListener('mousemove', e => { fillTooltip(b); placeTooltip(e.clientX, e.clientY); });
+          bar.addEventListener('focus', () => {
+            fillTooltip(b);
+            const r = bar.getBoundingClientRect();
+            placeTooltip(Math.min(r.right + 12, window.innerWidth - 40), r.top + r.height / 2);
+            showTooltip();
+          });
+          bar.addEventListener('blur', hideTooltip);
+          bar.addEventListener('keydown', e => { if (e.key === 'Escape') hideTooltip(); });
+          bar.addEventListener('pointerdown', e => {
+            if (e.pointerType === 'mouse') return;
+            if (touchShown === bar) { hideTooltip(); touchShown = null; return; }
+            fillTooltip(b);
+            placeTooltip(e.clientX, e.clientY);
+            showTooltip();
+            touchShown = bar;
           });
           track.appendChild(bar);
           bars.push({ bar, w });
         });
-        row.appendChild(track); lanesEl.appendChild(row);
+        row.appendChild(track);
+        lanesEl.appendChild(row);
       });
 
       // grow-in animation on scroll
@@ -2445,11 +2594,14 @@
       }, { threshold: .2 }).observe(lanesEl);
 
       const todayPct = pct(TODAY);
-      const todayLine = document.createElement('div'); todayLine.className = 'co-today-line';
-      const todayLabelEl = document.createElement('div'); todayLabelEl.className = 'co-today-label';
+      const todayLine = document.createElement('div');
+      todayLine.className = 'co-today-line';
+      const todayLabelEl = document.createElement('div');
+      todayLabelEl.className = 'co-today-label';
       todayLabelEl.textContent = 'Today';
       lanesEl.style.position = 'relative';
-      lanesEl.appendChild(todayLabelEl); lanesEl.appendChild(todayLine);
+      lanesEl.appendChild(todayLabelEl);
+      lanesEl.appendChild(todayLine);
       function positionTodayLine() {
         const lanesRect = lanesEl.getBoundingClientRect();
         const firstLabel = lanesEl.querySelector('.co-lane-label');
